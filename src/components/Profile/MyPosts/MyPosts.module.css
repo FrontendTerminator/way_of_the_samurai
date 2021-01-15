@@ -1,0 +1,17 @@
+.postBlock {
+    padding: 10px;
+}
+
+.posts {
+    margin-top: 10px;
+}
+
+.addPost {
+    background-color: #FF7F66;
+    color: white;
+}
+
+.textarea {
+    background-color: #F1F3FF;
+}
+
