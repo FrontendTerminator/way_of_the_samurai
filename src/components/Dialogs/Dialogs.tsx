@@ -2,26 +2,42 @@ import React, {ChangeEvent} from "react";
 import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {DialogsPageType, DialogsType, MessagesType} from "../../redux/state";
+import {
+    addMessageActionCreator,
+    addMessageInStateActionCreator,
+    DialogsPageType,
+    DialogsType,
+    MessagesType
+} from "../../redux/state";
+
+type AddPostActionContainerType = {
+    type: "ADD-POST-ACTION-CONTAINER"
+}
+type AddMessageType = {
+    type: "ADD-MESSAGE"
+    newText: string
+}
+type ProfileActionType = AddMessageType | AddPostActionContainerType
 
 type DialogsPropsType = {
     dialogsPage: DialogsPageType
-    addMessage: (newText: string) => void
-    addMessageInState: () => void
+    dispatch: (action: ProfileActionType) => void
 }
+
 
 const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
-    let dialogsElements = props.dialogsPage.dialogs.map((d: DialogsType) => <DialogItem name={d.name} id={d.id}/> )
-    let messagesElements = props.dialogsPage.messages.map( (m: MessagesType) => <Message message={m.message}/>)
+    let dialogsElements = props.dialogsPage.dialogs.map((d: DialogsType) => <DialogItem name={d.name} id={d.id}/>)
+    let messagesElements = props.dialogsPage.messages.map((m: MessagesType) => <Message message={m.message}/>)
+    let newMessageBody = props.dialogsPage.newMessage
 
     const addNewMessage = () => {
-        props.addMessageInState()
+        props.dispatch(addMessageInStateActionCreator())
     }
 
     const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let newText = e.currentTarget.value
-        props.addMessage(newText)
+        props.dispatch(addMessageActionCreator(newText))
     }
 
     return (
@@ -32,7 +48,7 @@ const Dialogs: React.FC<DialogsPropsType> = (props) => {
             <div className={s.messages}>
                 {messagesElements}
                 <textarea
-                    value={props.dialogsPage.newMessage}
+                    value={newMessageBody}
                     onChange={onChange}
                 />
                 <button onClick={addNewMessage}>add</button>

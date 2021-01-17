@@ -7,7 +7,7 @@ type DialogItemType = {
     name: string
 }
 
-const DialogItem: React.FC <DialogItemType> = (props: any) => {
+const DialogItem: React.FC <DialogItemType> = (props) => {
     let path = "/dialogs/" + props.id;
 
     return <div className={s.dialog + ' ' + s.active}>

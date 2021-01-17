@@ -10,9 +10,7 @@ type PostsArrayType = {
 }
 export type MyPostsType = {
     posts: Array<PostsArrayType>
-    // addPost: (postMessage: string) => void
     newPostText: string
-    // updateNewPostText: (newText: string) => void
     dispatch: (action: ActionType) => void
 }
 type AddPostType = {
