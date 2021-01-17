@@ -1,6 +1,7 @@
 import React, {ChangeEvent} from "react";
 import s from "./MyPosts.module.css";
 import Post from "./Post/Post";
+import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/state";
 
 type PostsArrayType = {
     id: number
@@ -29,13 +30,13 @@ const MyPosts: React.FC<MyPostsType> = (props) => {
 
     let addPost = () => {
         // props.addPost(props.newPostText)
-        props.dispatch({type: "ADD-POST"})
+        props.dispatch(addPostActionCreator())
     }
 
     let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let text = e.currentTarget.value
         // props.updateNewPostText(text)
-        props.dispatch({type: "UPDATE-NEW-POST-TEXT", newText: text})
+        props.dispatch(updateNewPostTextActionCreator(text))
     }
 
     return (
