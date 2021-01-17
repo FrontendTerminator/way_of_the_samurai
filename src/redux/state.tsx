@@ -115,7 +115,7 @@ export let store: StoreType = {
         this._callSubscriber()
     },
 
-    dispatch(action){
+    dispatch(action) {
         if (action.type === ADD_POST) {
             let newPost: PostsType = {
                 id: 5,
@@ -132,10 +132,9 @@ export let store: StoreType = {
     }
 }
 
-export const addPostActionCreator = (): AddPostType  => {
-    return  {type: ADD_POST}
-}
-export const updateNewPostTextActionCreator = (text: string): UpdateNewPostTextType => {
-    return  {type: UPDATE_NEW_POST_TEXT, newText: text}
-}
+export const addPostActionCreator = (): AddPostType => ({type: ADD_POST})
+
+export const updateNewPostTextActionCreator = (text: string): UpdateNewPostTextType =>
+    ({type: UPDATE_NEW_POST_TEXT, newText: text})
+
 
