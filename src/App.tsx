@@ -5,10 +5,18 @@ import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
+import {RootStateType, StoreType} from "./redux/state";
+import {ActionType} from "./components/Profile/MyPosts/MyPosts";
 
+type AppPropsType = {
+    state: RootStateType
+    dispatch: (action: ActionType) => void
+    addMessage: (newText: string) => void
+    addMessageInState: () => void
+}
 
+const App: React.FC<AppPropsType> = (props) => {
 
-const App: React.FC<any> = (props) => {
     return (
         <BrowserRouter>
             <div className={"app-wrapper"}>
@@ -24,8 +32,8 @@ const App: React.FC<any> = (props) => {
                     <Route path="/Profile"
                            render={() => <Profile
                                profilePage={props.state.profilePage}
-                               addPost={props.addPost}
-                               updateNewPostText={props.updateNewPostText}
+                               dispatch={props.dispatch}
+                               // updateNewPostText={props.updateNewPostText}
                            />}/>
                 </div>
             </div>
