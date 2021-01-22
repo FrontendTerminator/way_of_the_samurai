@@ -1,5 +1,5 @@
-import profileReducer, {CType, DType} from "./Profile-reducer";
-import dialogsReducer, {AType, BType} from "./Dialogs-reducer";
+import profileReducer, {ProfileReducerActionType} from "./Profile-reducer";
+import dialogsReducer, {DialogsReducerActionType} from "./Dialogs-reducer";
 import sidebarReducer from "./Sidebar-reducer";
 
 type PostsType = {
@@ -42,13 +42,13 @@ export type StoreType = {
     getState: () => RootStateType //
     _callSubscriber: () => void
     subscribe: (observer: () => void) => void
-    dispatch: (action: DispatchActionType) => void
+    dispatch: (action: any) => void
 }
+
 export type DispatchActionType =
-    AType | BType | CType | DType
-// export type DispatchActionType =
-//     ProfileReducerActionType |
-//     DialogsReducerActionType
+    ProfileReducerActionType |
+    DialogsReducerActionType
+
 
 export let store: StoreType = {
     _state: {

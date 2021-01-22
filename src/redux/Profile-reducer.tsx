@@ -1,17 +1,32 @@
 import React from 'react';
-import {DispatchActionType, ProfilePageType} from "./state";
 
-export type CType = ReturnType<typeof addPostActionCreator>
-export type DType = ReturnType<typeof updateNewPostTextActionCreator>
+type PostsType = {
+    id: number
+    message: string
+    likesCount: number
+}
+export type ProfilePageType = {
+    posts: Array<PostsType>
+    newPostText: string
+}
+export type ProfileReducerActionType =
+    ReturnType<typeof addPostActionCreator> |
+    ReturnType<typeof updateNewPostTextActionCreator>
 
-// export type ProfileReducerActionType =
-//     ReturnType<typeof addPostActionCreator> |
-//     ReturnType<typeof updateNewPostTextActionCreator>
+let initialState: ProfilePageType = {
+    posts: [
+        {id: 1, message: "Hi, how are you?", likesCount: 11},
+        {id: 2, message: "It's my first message", likesCount: 12},
+        {id: 3, message: "Yo!", likesCount: 12},
+        {id: 4, message: "Dada", likesCount: 12}
+    ],
+    newPostText: 'new post...'
+}
 
 const ADD_POST = "ADD-POST"
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
 
-const profileReducer = (state: ProfilePageType, action: DispatchActionType) => {
+const profileReducer = (state = initialState, action: ProfileReducerActionType) => {
     switch (action.type) {
         case ADD_POST:
             let newPost = {
