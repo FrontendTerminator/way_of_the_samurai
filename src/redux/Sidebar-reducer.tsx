@@ -6,7 +6,7 @@ export type SidebarType = {
     friends: Array<FriendsType>
 }
 
-let initialState: SidebarType = {
+let initialState = {
     friends: [
         {id: 1, name: "Andrew"},
         {id: 2, name: "Sasha"},
@@ -14,9 +14,11 @@ let initialState: SidebarType = {
     ]
 }
 
-const sidebarReducer = (state = initialState, action: any) => {
+const sidebarReducer = (state: SidebarType = initialState, action: any) => {
 
     return state
 }
+
+
 
 export default sidebarReducer;

@@ -49,7 +49,6 @@ export type DispatchActionType =
     ProfileReducerActionType |
     DialogsReducerActionType
 
-
 export let store: StoreType = {
     _state: {
         profilePage: {

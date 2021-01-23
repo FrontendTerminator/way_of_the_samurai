@@ -18,7 +18,7 @@ export type DialogsReducerActionType =
     ReturnType<typeof addMessageInStateActionCreator> |
     ReturnType<typeof addMessageActionCreator>
 
-let initialState: DialogsPageType = {
+let initialState = {
     messages: [
         {id: 1, message: "hi"},
         {id: 2, message: 'How is your it-kamasutra?'},
@@ -40,7 +40,7 @@ let initialState: DialogsPageType = {
 const ADD_POST_ACTION_CONTAINER = "ADD-POST-ACTION-CONTAINER"
 const ADD_MESSAGE = "ADD-MESSAGE"
 
-const dialogsReducer = (state = initialState, action: DialogsReducerActionType) => {
+const dialogsReducer = (state: DialogsPageType = initialState, action: DialogsReducerActionType) => {
     switch (action.type) {
         case ADD_POST_ACTION_CONTAINER:
             let newMessageObj = {id: 7, message: state.newMessage}
