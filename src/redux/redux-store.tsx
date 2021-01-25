@@ -4,9 +4,9 @@ import dialogsReducer from "./Dialogs-reducer";
 import sidebarReducer from "./Sidebar-reducer";
 
 type ReducersType = typeof reducers // тип стейта
-export type ReduxStoreType = ReturnType<ReducersType> // типизация
+export type StateStoreType = ReturnType<ReducersType> // типизация
 
-export type StoreType = typeof store //
+export type StoreType = typeof store // типизация всего стора
 
 let reducers = combineReducers({
     profilePage: profileReducer,
@@ -16,6 +16,5 @@ let reducers = combineReducers({
 
 export let store = createStore(reducers)
 
-const a:ReduxStoreType = store.getState();
 
 

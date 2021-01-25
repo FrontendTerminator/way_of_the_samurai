@@ -2,13 +2,10 @@ import React, {ChangeEvent} from "react";
 import s from './Dialogs.module.css'
 import DialogItem, {DialogItemType} from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {DialogsPageType, DialogsType, MessagesType} from "../../redux/store";
-import {addMessageActionCreator, addMessageInStateActionCreator} from "../../redux/Dialogs-reducer"
-import {ReduxStoreType} from "../../redux/redux-store";
+import {DialogsPageType, MessagesType} from "../../redux/store";
 
 type DialogsPropsType = {
     dialogsPage: DialogsPageType
-    // dispatch: (action: ProfileActionType) => void
     addMessageActionCreator: (newText: string) => void
     addNewMessage: () => void
 }
