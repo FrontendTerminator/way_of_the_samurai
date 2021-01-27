@@ -10,7 +10,7 @@ type PostsArrayType = {
 export type MyPostsType = {
     posts: Array<PostsArrayType>
     newPostText: string
-    updateNewPostText: (text: string) => void
+    onPostChange: (text: string) => void
     addPost: () => void
 }
 
@@ -24,7 +24,7 @@ const MyPosts: React.FC<MyPostsType> = (props) => {
 
     let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let text = e.currentTarget.value
-        props.updateNewPostText(text)
+        props.onPostChange(text)
     }
 
     return (

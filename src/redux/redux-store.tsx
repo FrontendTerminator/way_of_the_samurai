@@ -14,7 +14,11 @@ let reducers = combineReducers({
     sidebar: sidebarReducer
 })
 
+
+
 export let store = createStore(reducers)
+
+// window.store = store
 
 
 

@@ -15,3 +15,5 @@ export const Provider = (props: ProviderType) => {
 }
 
 export default StoreContext;
+
+// вметсо context заюзан react-redux. Это неиспользуемый файл.

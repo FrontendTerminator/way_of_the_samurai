@@ -7,11 +7,11 @@ type PostsType = {
     message: string
     likesCount: number
 }
-export type MessagesType = {
+type MessagesType = {
     id: number
     message: string
 }
-export type DialogsType = {
+type DialogsType = {
     id: number
     name: string
 }
@@ -19,25 +19,25 @@ type FriendsType = {
     id: number
     name: string
 }
-export type ProfilePageType = {
+type ProfilePageType = {
     posts: Array<PostsType>
     newPostText: string
 }
-export type DialogsPageType = {
+type DialogsPageType = {
     messages: Array<MessagesType>
     dialogs: Array<DialogsType>
     newMessage: string
 }
-export type SidebarType = {
+type SidebarType = {
     friends: Array<FriendsType>
 }
-export type RootStateType = {
+type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
     sidebar: SidebarType
 
 }
-export type StoreType = {
+type StoreType = {
     _state: RootStateType
     getState: () => RootStateType //
     _callSubscriber: () => void
@@ -45,11 +45,11 @@ export type StoreType = {
     dispatch: (action: any) => void
 }
 
-export type DispatchActionType =
+type DispatchActionType =
     ProfileReducerActionType |
     DialogsReducerActionType
 
-export let store: StoreType = {
+let store: StoreType = {
     _state: {
         profilePage: {
             posts: [
