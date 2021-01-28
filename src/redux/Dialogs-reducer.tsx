@@ -42,19 +42,27 @@ const ADD_MESSAGE = "ADD-MESSAGE"
 
 const dialogsReducer = (state: DialogsPageType = initialState, action: DialogsReducerActionType) => {
     switch (action.type) {
-        case ADD_POST_ACTION_CONTAINER: {
-            let stateCopy = {...state}
-            let newMessageObj = {id: 7, message: state.newMessage}
-            stateCopy.messages = [...state.messages]
-            stateCopy.messages.push(newMessageObj)
-            stateCopy.newMessage = ''
-            return stateCopy
-        }
-        case ADD_MESSAGE: {
-            let stateCopy = {...state}
-            stateCopy.newMessage = action.newText;
-            return stateCopy
-        }
+        case ADD_MESSAGE:
+            return {
+                ...state,
+                newMessage: action.newText
+            }
+            // let stateCopy = {...state}
+            // stateCopy.newMessage = action.newText;
+            // return stateCopy
+        case ADD_POST_ACTION_CONTAINER:
+            let newMessageCopy = state.newMessage
+            return {
+                ...state,
+                messages: [...state.messages, {id: 7, message: newMessageCopy}],
+                newMessage: ""
+            }
+            // let stateCopy = {...state}
+            // let newMessageObj = {id: 7, message: state.newMessage}
+            // stateCopy.messages = [...state.messages]
+            // stateCopy.messages.push(newMessageObj)
+            // stateCopy.newMessage = ''
+            // return stateCopy
         default:
             return state
     }

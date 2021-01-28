@@ -1,6 +1,7 @@
-import React from "react";
+import React, {Dispatch} from "react";
 import Navbar from "./Navbar";
 import {connect} from "react-redux";
+import {StateStoreType} from "../../redux/redux-store";
 
 // const NavbarContainer: React.FC<NavbarType> = (props) => {
 //
@@ -15,12 +16,12 @@ import {connect} from "react-redux";
 //
 // export default NavbarContainer;
 
-let mapStateToProps = (state: any) => {
+let mapStateToProps = (state: StateStoreType) => {
     return {
         sidebar: state.sidebar
     }
 }
-let mapDispatchToProps = (dispatch: any) => {
+let mapDispatchToProps = (dispatch: Dispatch<any>) => {
     return {
 
     }
