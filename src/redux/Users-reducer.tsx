@@ -1,14 +1,13 @@
-type LocationType = {
-    city: string
-    country: string
-}
 export type UserType = {
+    name: string
     id: number
-    followed: boolean
-    fullName: string
+    uniqueUrlName: null
+    photos: {
+        "small": null | string | undefined
+        "large": null
+    }
     status: string
-    location: LocationType
-    photoUrl: string
+    followed: boolean
 }
 export type UsersReducerStateType = {
     users: Array<UserType>
@@ -56,6 +55,6 @@ const usersReducer = (state: UsersReducerStateType = initialState, action: Users
 
 export const followAC = (userId: number) => ({type: FOLLOW, userId}) as const
 export const unfollowAC = (userId: number) => ({type: UNFOLLOW, userId}) as const
-export const setUsersAC = (users: Array<UserType>) => ({type: SET_USERS, users}) as const // need to fix
+export const setUsersAC = (users: Array<UserType>) => ({type: SET_USERS, users}) as const
 
 export default usersReducer;
