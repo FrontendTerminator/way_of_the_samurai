@@ -16,7 +16,9 @@ export class Users extends React.Component<UsersPagePropsType, Array<UserType>> 
 
     constructor(props: UsersPagePropsType) {
         super(props);
-        alert('new')
+    }
+
+    componentDidMount() {
         axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
             this.props.setUsers(response.data.items)
         })
