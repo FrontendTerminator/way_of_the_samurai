@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {
     followAC,
     setCurrentPageAC,
-    setUsersAC, setUsersTotalCountAC,
+    setUsersAC, setUsersTotalCountAC, toggleIsFetchingAC,
     unfollowAC,
     UsersReducerActionType,
     UserType
@@ -11,6 +11,8 @@ import {
 import {StateStoreType} from "../../redux/redux-store";
 import axios from "axios";
 import {Users} from "./users";
+import preloader from "./../../assets/images/48083.gif"
+import {Preloader} from "../Common/Preloader/Preloader";
 
 type UsersPagePropsType = {
     users: Array<UserType>
@@ -19,9 +21,11 @@ type UsersPagePropsType = {
     setUsers: (users: Array<UserType>) => void
     setCurrentPage: (pageNumber: number) => void
     setTotalCount: (totalCount: number) => void
+    toggleIsFetching: (isFetching: boolean) => void
     totalUsersCount: number
     pageSize: number
     currentPage: number
+    isFetching: boolean
 }
 // Типизация классовой компоненты. Первый параметр - типизация пропсов, второй - типизация стейта.
 // Пропсы конструктора типизируем как и пропсы компоненты.
@@ -33,7 +37,9 @@ class UsersContainer extends React.Component<UsersPagePropsType, Array<UserType>
     }
 
     componentDidMount() {
+        this.props.toggleIsFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+            this.props.toggleIsFetching(false)
             this.props.setUsers(response.data.items)
             this.props.setTotalCount(response.data.totalCount)
         })
@@ -41,32 +47,43 @@ class UsersContainer extends React.Component<UsersPagePropsType, Array<UserType>
 
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
+        this.props.toggleIsFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
+            this.props.toggleIsFetching(false)
             this.props.setUsers(response.data.items)
         })
     }
 
     render() {
         return (
-            <Users
-                totalUsersCount={this.props.totalUsersCount}
-                pageSize={this.props.pageSize}
-                currentPage={this.props.currentPage}
-                users={this.props.users}
-                onPageChanged={this.onPageChanged}
-                follow={this.props.follow}
-                unfollow={this.props.unfollow}
-            />
+            <>
+                {this.props.isFetching ? <Preloader/> : null}
+                <Users
+                    totalUsersCount={this.props.totalUsersCount}
+                    pageSize={this.props.pageSize}
+                    currentPage={this.props.currentPage}
+                    users={this.props.users}
+                    onPageChanged={this.onPageChanged}
+                    follow={this.props.follow}
+                    unfollow={this.props.unfollow}
+                />
+            </>
         )
     }
+
 }
 
 let mapStateToProps = (state: StateStoreType) => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
+        users: state.usersPage.users
+        ,
+        pageSize: state.usersPage.pageSize
+        ,
+        totalUsersCount: state.usersPage.totalUsersCount
+        ,
         currentPage: state.usersPage.currentPage
+        ,
+        isFetching: state.usersPage.isFetching
     }
 }
 
@@ -86,6 +103,9 @@ let mapDispatchToProps = (dispatch: Dispatch<UsersReducerActionType>) => {
         },
         setTotalCount: (totalCount: number) => {
             dispatch(setUsersTotalCountAC(totalCount))
+        },
+        toggleIsFetching: (isFetching: boolean) => {
+            dispatch(toggleIsFetchingAC(isFetching))
         }
     }
 }
