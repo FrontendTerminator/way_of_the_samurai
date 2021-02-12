@@ -72,3 +72,4 @@ export const addMessageActionCreator = (text: string) =>
     ({type: ADD_MESSAGE, newText: text}) as const
 
 export default dialogsReducer;
+

@@ -27,34 +27,3 @@ let mapDispatchToProps = (dispatch: Dispatch<ProfileReducerActionType>) => {
 
 export const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
 
-// export type MyPostsType = {
-//     // store: StoreType
-// }
-//
-// const MyPostsContainer: React.FC<MyPostsType> = () => {
-//
-//     return (
-//         <StoreContext.Consumer>
-//             {(store) => {
-//                 let state = store.getState()
-//
-//                 let addPost = () => {
-//                     store.dispatch(addPostActionCreator())
-//                 }
-//                 let onPostChange = (text: string) => {
-//                     store.dispatch(updateNewPostTextActionCreator(text))
-//                 }
-//
-//                 return <MyPosts
-//                     addPost={addPost}
-//                     updateNewPostText={onPostChange}
-//                     posts={state.profilePage.posts}
-//                     newPostText={state.profilePage.newPostText}
-//                 />
-//             }}
-//         </StoreContext.Consumer>
-//
-//     )
-// }
-//
-// export default MyPostsContainer;
