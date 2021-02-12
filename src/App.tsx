@@ -5,17 +5,9 @@ import Profile from "./components/Profile/Profile";
 import {BrowserRouter, Route} from "react-router-dom";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {NavbarContainer} from "./components/Navbar/NavbarContainer";
-import {UsersContainer} from "./components/Users/UsersContainer";
+import {UsersContainerContext} from "./components/Users/UsersContainer";
 
-
-
-type AppPropsType = {
-    // state: RootStateType
-    // dispatch: (action: DispatchActionType) => void
-    // store: StoreType
-}
-
-const App: React.FC<AppPropsType> = () => {
+const App: React.FC = () => {
 
     return (
         <BrowserRouter>
@@ -28,7 +20,7 @@ const App: React.FC<AppPropsType> = () => {
                     <Route path="/Profile"
                            render={() => <Profile/>}/>
                     <Route path={"/users"}
-                           render={() => <UsersContainer/>}/>
+                           render={() => <UsersContainerContext/>}/>
                 </div>
             </div>
         </BrowserRouter>
