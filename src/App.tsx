@@ -18,7 +18,8 @@ const App: React.FC = () => {
                 <div className={"app-wrapper-content"}>
                     <Route path="/dialogs"
                            render={() => <DialogsContainer/>}/>
-                    <Route path="/Profile"
+                    {/*в пути пишем, чтобы он отображал params (userId), параметр для withRouters, если пути совпадут. Тут мы говорим : по айди и стамив ? - который говорит что id не обязателен*/}
+                    <Route path="/Profile/:userId?"
                            render={() => <ProfileContainer/>}/>
                     <Route path={"/users"}
                            render={() => <UsersContainerContext/>}/>
