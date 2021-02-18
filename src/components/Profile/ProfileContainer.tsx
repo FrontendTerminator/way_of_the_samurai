@@ -17,7 +17,6 @@ type MapDispatchPropsType = {
 type PathParamsType = { // типизация параметра для withRouter - RouteComponentProps<PathParamsType>
     userId: string
 }
-
 type ProfileContainerType = RouteComponentProps<PathParamsType> & MapDispatchPropsType & MapStatePropsType
 
 
@@ -32,7 +31,6 @@ class ProfileContainer extends React.Component<ProfileContainerType, ProfileType
         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
             .then(response => {
                 this.props.setUsersProfile(response.data)
-                console.log(this.props.setUsersProfile(response.data))
             })
     }
 

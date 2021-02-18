@@ -1,19 +1,20 @@
 import React from 'react';
 import './App.css';
-import Header from "./components/Header/header";
-import Profile from "./components/Profile/Profile";
 import {BrowserRouter, Route} from "react-router-dom";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {NavbarContainer} from "./components/Navbar/NavbarContainer";
 import {UsersContainerContext} from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
+import HeaderContainer from "./components/Header/headerContainer";
+
+
 
 const App: React.FC = () => {
 
     return (
         <BrowserRouter>
             <div className={"app-wrapper"}>
-                <Header/>
+                <HeaderContainer/>
                 <NavbarContainer/>
                 <div className={"app-wrapper-content"}>
                     <Route path="/dialogs"
