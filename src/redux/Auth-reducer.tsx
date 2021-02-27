@@ -1,6 +1,6 @@
 import {Dispatch} from "redux";
 import axios from "axios";
-import {headerApi} from "../api/api";
+import {authAPI} from "../api/api";
 
 const SET_USER_DATA = 'SET_USER_DATA'
 
@@ -36,9 +36,9 @@ const authReducer = (state: AuthReducerStateType = initialState, action: AuthRed
 export const setAuthUserData = (userId: number, email: string, login: string) =>
     ({type: SET_USER_DATA, data: {userId, email, login}}) as const
 
-export const authThunk = () => {
+export const getAuthUserData = () => {
     return (dispatch: Dispatch<AuthReducerActionType>) => {
-        headerApi.auth().then(response => {
+        authAPI.auth().then(response => {
             if (response.data.resultCode === 0) {
                 let {id, email, login} = response.data.data
                 dispatch(setAuthUserData(id, email, login))

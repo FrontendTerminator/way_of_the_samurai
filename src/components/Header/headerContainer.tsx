@@ -2,7 +2,7 @@ import React from "react";
 import Header from "./header";
 import {connect} from "react-redux";
 import {StateStoreType} from "../../redux/redux-store";
-import {authThunk, setAuthUserData} from "../../redux/Auth-reducer";
+import {getAuthUserData, setAuthUserData} from "../../redux/Auth-reducer";
 
 type HeaderContainerType = {
     authThunk: () => void
@@ -37,4 +37,4 @@ const MapStateToProps = (state: StateStoreType) => ({
     login: state.auth.login
 })
 
-export default connect(MapStateToProps, {authThunk})(HeaderContainer)
+export default connect(MapStateToProps, {authThunk: getAuthUserData})(HeaderContainer)

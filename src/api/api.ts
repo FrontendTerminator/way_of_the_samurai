@@ -7,40 +7,31 @@ const instance = axios.create({ // облегчает работу с axios за
 })
 
 export const usersAPI = {
-
     getUsers(currentPage: number = 1, pageSize: number = 10) {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`)
             .then(response => {
                 return response.data
             })
     },
-
     followUser(id: number) {
         return instance.post(`follow/${id}`)
             .then(response => {
                 return response.data.resultCode
             })
     },
-
     unFollowUser(id: number) {
         return instance.delete(`follow/${id}`)
             .then(response => {
                 return response.data.resultCode
             })
+    },
+    getProfile(userId: string) {
+        return instance.get(`profile/` + userId)
     }
-
 }
 
-export const headerApi = {
+export const authAPI = {
     auth() {
-    return axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
-        withCredentials: true // объект который переадется вторым аргументом в запрос, чтобы отправить фай cookie, true - отправить. Если этого не сделать то не будет отправляться файл куки и не произойдёт автоматической атворизации через сервак
-    })
-    }
-}
-
-export const profileApi = {
-    getUser(userId: string) {
-        return axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
+    return instance.get(`auth/me`)
     }
 }

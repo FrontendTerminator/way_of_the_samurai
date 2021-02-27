@@ -2,7 +2,7 @@ import React from "react";
 import Profile from "./Profile";
 import axios from "axios";
 import {connect} from "react-redux";
-import {profileThunk, ProfileType, setUsersProfile} from "../../redux/Profile-reducer";
+import {getUserProfile, ProfileType, setUsersProfile} from "../../redux/Profile-reducer";
 import {StateStoreType} from "../../redux/redux-store";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 
@@ -48,4 +48,4 @@ let mapStateToProps = (state: StateStoreType): MapStatePropsType => ({
 // функция withRouter создаёт контейнер и передаёт через пропсы данные из url
 let WithUrlDataContainerComponent = withRouter(ProfileContainer)
 // контейнер для redux, который получает также инфу по URL
-export default connect(mapStateToProps, {profileThunk})(WithUrlDataContainerComponent)
+export default connect(mapStateToProps, {profileThunk: getUserProfile})(WithUrlDataContainerComponent)

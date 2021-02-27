@@ -1,7 +1,6 @@
 import React from 'react';
 import {Dispatch} from "redux";
-import axios from "axios";
-import {profileApi} from "../api/api";
+import {usersAPI} from "../api/api";
 
 type PostsType = {
     id: number
@@ -90,9 +89,10 @@ export const setUsersProfile = (profile: ProfileType) =>
 export const updateNewPostTextActionCreator = (text: string) =>
     ({type: UPDATE_NEW_POST_TEXT, newText: text}) as const
 
-export const profileThunk = (userId: string) => {
+// Thunk
+export const getUserProfile = (userId: string) => {
     return (dispatch: Dispatch<ProfileReducerActionType>) => {
-        profileApi.getUser(userId)
+        usersAPI.getProfile(userId)
             .then(response => {
                 dispatch(setUsersProfile(response.data))
             })
