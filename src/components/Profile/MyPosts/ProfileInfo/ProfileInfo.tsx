@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import s from "./ProfileInfo.module.css"
 import {ProfileType} from "../../../../redux/Profile-reducer";
 import {Preloader} from "../../../Common/Preloader/Preloader";

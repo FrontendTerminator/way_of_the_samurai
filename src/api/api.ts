@@ -31,3 +31,16 @@ export const usersAPI = {
 
 }
 
+export const headerApi = {
+    auth() {
+    return axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
+        withCredentials: true // объект который переадется вторым аргументом в запрос, чтобы отправить фай cookie, true - отправить. Если этого не сделать то не будет отправляться файл куки и не произойдёт автоматической атворизации через сервак
+    })
+    }
+}
+
+export const profileApi = {
+    getUser(userId: string) {
+        return axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
+    }
+}

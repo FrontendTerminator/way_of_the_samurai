@@ -1,4 +1,4 @@
-import React, {Dispatch} from "react";
+import React from "react";
 import {
     addMessageActionCreator,
     addMessageInStateActionCreator,
@@ -8,6 +8,7 @@ import {
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {StateStoreType} from "../../redux/redux-store";
+import { Dispatch } from "redux";
 
 let mapStateToProps = (state: StateStoreType) => {
     return {

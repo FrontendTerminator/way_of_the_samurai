@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import s from "./header.module.css";
 
 type HeaderTypePropsType = {
@@ -13,8 +13,9 @@ const Header: React.FC<HeaderTypePropsType> = (props) => {
         {/*    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-LsQsFeofHHKzAKKv_gJpQrz8NC_O3yQkdQ&usqp=CAU"*/}
         {/*    />*/}
         <div className={s.loginBlock}>
-            {props.isAuth ? props.login
-            : <NavLink to={'/login'}>Login</NavLink> }
+            {props.isAuth
+                ? props.login
+                : <NavLink to={'/login'}>Login</NavLink>}
         </div>
     </header>
 }
