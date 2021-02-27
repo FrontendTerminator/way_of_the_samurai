@@ -6,6 +6,7 @@ import {NavbarContainer} from "./components/Navbar/NavbarContainer";
 import {UsersContainerContext} from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/headerContainer";
+import {Login} from "./components/Login/Login";
 
 
 
@@ -24,6 +25,8 @@ const App: React.FC = () => {
                            render={() => <ProfileContainer/>}/>
                     <Route path={"/users"}
                            render={() => <UsersContainerContext/>}/>
+                    <Route path={"/login"}
+                           render={() => <Login/>}/>
                 </div>
             </div>
         </BrowserRouter>

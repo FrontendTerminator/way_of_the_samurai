@@ -12,7 +12,8 @@ import { Dispatch } from "redux";
 
 let mapStateToProps = (state: StateStoreType) => {
     return {
-        dialogsPage: state.dialogsPage
+        dialogsPage: state.dialogsPage,
+        isAuth: state.auth.isAuth
     }
 }
 let mapDispatchToProps = (dispatch: Dispatch<DialogsReducerActionType>) => {

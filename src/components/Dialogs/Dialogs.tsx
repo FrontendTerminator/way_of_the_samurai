@@ -3,12 +3,14 @@ import s from './Dialogs.module.css'
 import DialogItem, {DialogItemType} from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {DialogsPageType, MessagesType} from "../../redux/Dialogs-reducer";
+import { Redirect } from "react-router-dom";
 
 
 type DialogsPropsType = {
     dialogsPage: DialogsPageType
     onChange: (newText: string) => void
     addNewMessage: () => void
+    isAuth: boolean
 }
 
 const Dialogs: React.FC<DialogsPropsType> = (props) => {
@@ -27,6 +29,9 @@ const Dialogs: React.FC<DialogsPropsType> = (props) => {
         let newText = e.currentTarget.value
         props.onChange(newText)
     }
+
+    // isAuth (есть ли авторизация на серваке), если нет тогда Redirect перенаправит нас по пути login и не отрисует свой jsx
+    if (!props.isAuth) return <Redirect to={"/login"} />
 
     return (
         <div className={s.dialogs}>

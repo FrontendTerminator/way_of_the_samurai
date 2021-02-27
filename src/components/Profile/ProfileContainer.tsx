@@ -4,14 +4,16 @@ import axios from "axios";
 import {connect} from "react-redux";
 import {getUserProfile, ProfileType, setUsersProfile} from "../../redux/Profile-reducer";
 import {StateStoreType} from "../../redux/redux-store";
-import {RouteComponentProps, withRouter} from "react-router-dom";
+import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
 
 
 type MapStatePropsType = {
     profile: ProfileType | null
+    isAuth: boolean
 }
 type MapDispatchPropsType = {
     profileThunk: (userId: string) => void
+
 }
 type PathParamsType = { // типизация параметра для withRouter - RouteComponentProps<PathParamsType>
     userId: string
@@ -36,6 +38,8 @@ class ProfileContainer extends React.Component<ProfileContainerType, ProfileType
     }
 
     render() {
+        if (!this.props.isAuth) return <Redirect to={"/login"} />
+
         return (
             <Profile {...this.props} profile={this.props.profile}/>
         )
@@ -43,7 +47,8 @@ class ProfileContainer extends React.Component<ProfileContainerType, ProfileType
 }
 
 let mapStateToProps = (state: StateStoreType): MapStatePropsType => ({
-    profile: state.profilePage.profile
+    profile: state.profilePage.profile,
+    isAuth: state.auth.isAuth
 })
 // функция withRouter создаёт контейнер и передаёт через пропсы данные из url
 let WithUrlDataContainerComponent = withRouter(ProfileContainer)
