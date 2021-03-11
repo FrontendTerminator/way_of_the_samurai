@@ -8,7 +8,7 @@ import {
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {StateStoreType} from "../../redux/redux-store";
-import { Dispatch } from "redux";
+import {compose, Dispatch } from "redux";
 import {Redirect} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
@@ -28,10 +28,11 @@ let mapDispatchToProps = (dispatch: Dispatch<DialogsReducerActionType>) => {
     }
 }
 
-// custom Hoc from folder hoc
-let AuthRedirectComponent = withAuthRedirect(Dialogs)
+export const DialogsContainer = compose<React.ComponentType>(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect
+)(Dialogs)
 
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent)
 
 
 

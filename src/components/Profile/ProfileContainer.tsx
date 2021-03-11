@@ -6,6 +6,7 @@ import {getUserProfile, ProfileType, setUsersProfile} from "../../redux/Profile-
 import {StateStoreType} from "../../redux/redux-store";
 import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 type MapStatePropsType = {
     profile: ProfileType | null
@@ -37,14 +38,23 @@ class ProfileContainer extends React.Component<ProfileContainerType, ProfileType
         )
     }
 }
-// custom Hoc from folder hoc
-let AuthRedirectComponent = withAuthRedirect(ProfileContainer)
 
 let mapStateToProps = (state: StateStoreType): MapStatePropsType => ({
     profile: state.profilePage.profile,
 })
 
-// функция withRouter создаёт контейнер и передаёт через пропсы данные из url
-let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent)
-// контейнер для redux, который получает также инфу по URL
-export default connect(mapStateToProps, {profileThunk: getUserProfile})(WithUrlDataContainerComponent)
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {profileThunk: getUserProfile}),
+    withRouter,
+    withAuthRedirect
+)(ProfileContainer)
+
+
+
+// // custom Hoc from folder hoc
+// let AuthRedirectComponent = withAuthRedirect(ProfileContainer)
+
+// // функция withRouter создаёт контейнер и передаёт через пропсы данные из url
+// let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent)
+// // контейнер для redux, который получает также инфу по URL
+// export default connect(mapStateToProps, {profileThunk: getUserProfile})(WithUrlDataContainerComponent)
