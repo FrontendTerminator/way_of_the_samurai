@@ -31,7 +31,7 @@ const Dialogs: React.FC<DialogsPropsType> = (props) => {
     }
 
     // isAuth (есть ли авторизация на серваке), если нет тогда Redirect перенаправит нас по пути login и не отрисует свой jsx
-    if (!props.isAuth) return <Redirect to={"/login"} />
+    //if (!props.isAuth) return <Redirect to={"/login"} />
 
     return (
         <div className={s.dialogs}>

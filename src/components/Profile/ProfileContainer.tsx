@@ -5,11 +5,10 @@ import {connect} from "react-redux";
 import {getUserProfile, ProfileType, setUsersProfile} from "../../redux/Profile-reducer";
 import {StateStoreType} from "../../redux/redux-store";
 import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
-
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 type MapStatePropsType = {
     profile: ProfileType | null
-    isAuth: boolean
 }
 type MapDispatchPropsType = {
     profileThunk: (userId: string) => void
@@ -30,27 +29,22 @@ class ProfileContainer extends React.Component<ProfileContainerType, ProfileType
             userId = "2"
         }
         this.props.profileThunk(userId)
-
-        /*axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
-            .then(response => {
-                this.props.setUsersProfile(response.data)
-            })*/
     }
 
     render() {
-        if (!this.props.isAuth) return <Redirect to={"/login"} />
-
         return (
             <Profile {...this.props} profile={this.props.profile}/>
         )
     }
 }
+// custom Hoc from folder hoc
+let AuthRedirectComponent = withAuthRedirect(ProfileContainer)
 
 let mapStateToProps = (state: StateStoreType): MapStatePropsType => ({
     profile: state.profilePage.profile,
-    isAuth: state.auth.isAuth
 })
+
 // функция withRouter создаёт контейнер и передаёт через пропсы данные из url
-let WithUrlDataContainerComponent = withRouter(ProfileContainer)
+let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent)
 // контейнер для redux, который получает также инфу по URL
 export default connect(mapStateToProps, {profileThunk: getUserProfile})(WithUrlDataContainerComponent)
