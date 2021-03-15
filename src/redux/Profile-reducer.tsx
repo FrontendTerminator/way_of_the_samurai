@@ -1,6 +1,6 @@
 import React from 'react';
 import {Dispatch} from "redux";
-import {usersAPI} from "../api/api";
+import {profileAPI, usersAPI} from "../api/api";
 
 type PostsType = {
     id: number
@@ -32,11 +32,13 @@ export type ProfilePageType = {
     posts: Array<PostsType>
     newPostText: string
     profile: ProfileType | null
+    status: string
 }
 export type ProfileReducerActionType =
     ReturnType<typeof addPostActionCreator> |
-    ReturnType<typeof updateNewPostTextActionCreator>|
-    ReturnType<typeof setUsersProfile>
+    ReturnType<typeof updateNewPostTextActionCreator> |
+    ReturnType<typeof setUsersProfile> |
+    ReturnType<typeof setStatus>
 
 let initialState = {
     posts: [
@@ -46,12 +48,14 @@ let initialState = {
         {id: 4, message: "Dada", likesCount: 12}
     ],
     newPostText: 'new post...',
-    profile: null
+    profile: null,
+    status: ""
 }
 
 const ADD_POST = "ADD-POST"
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
 const SET_USER_PROFILE = "SET-USER-PROFILE"
+const SET_STATUS = "SET-STATUS"
 
 const profileReducer = (state: ProfilePageType = initialState, action: ProfileReducerActionType) => {
     switch (action.type) {
@@ -73,7 +77,13 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileRe
                 newPostText: action.newText
             }
         }
-        case SET_USER_PROFILE:{
+        case SET_STATUS: {
+            return {
+                ...state,
+                status: action.status
+            }
+        }
+        case SET_USER_PROFILE: {
             return {...state, profile: action.profile}
         }
         default:
@@ -85,6 +95,10 @@ export const addPostActionCreator = () => ({type: ADD_POST}) as const
 
 export const setUsersProfile = (profile: ProfileType) =>
     ({type: SET_USER_PROFILE, profile}) as const
+
+export const setStatus = (status: string) =>
+    ({type: SET_STATUS, status}) as const
+
 
 export const updateNewPostTextActionCreator = (text: string) =>
     ({type: UPDATE_NEW_POST_TEXT, newText: text}) as const
@@ -98,5 +112,26 @@ export const getUserProfile = (userId: string) => {
             })
     }
 }
+
+export const getStatus = (userId: string) => {
+    return (dispatch: Dispatch<ProfileReducerActionType>) => {
+        profileAPI.getStatus(userId)
+            .then(response => {
+                dispatch(setStatus(response.data))
+            })
+    }
+}
+
+export const updateStatus = (status: string) => {
+    return (dispatch: Dispatch<ProfileReducerActionType>) => {
+        profileAPI.updateStatus(status)
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    dispatch(setStatus(status))
+                }
+            })
+    }
+}
+
 
 export default profileReducer;
