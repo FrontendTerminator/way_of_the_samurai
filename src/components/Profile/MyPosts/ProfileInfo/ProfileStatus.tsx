@@ -14,6 +14,7 @@ export class ProfileStatus extends React.Component<ProfileInfoType> {
     }
 
     activateEditMode = () => {
+        // setState меняет локальный стейт и реакт перерисовывает компоненту
         this.setState({
             editMode: true
         })
@@ -30,6 +31,15 @@ export class ProfileStatus extends React.Component<ProfileInfoType> {
         this.setState({
             status: e.currentTarget.value
         })
+
+    }
+
+    componentDidUpdate(prevProps: Readonly<ProfileInfoType>, prevState: Readonly<{}>, snapshot?: any) {
+            if (prevProps.status !== this.props.status) {
+                this.setState({
+                    status: this.props.status
+                })
+            }
 
     }
 
