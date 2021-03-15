@@ -5,6 +5,7 @@ import sidebarReducer from "./Sidebar-reducer";
 import usersReducer from "./Users-reducer";
 import authReducer from "./Auth-reducer";
 import thunkMiddleware from "redux-thunk"; // yarn add redux-thunk по дефолту импортирует thunk, а не (thunkMiddleware). Передаём вторым параметром в createStore, чтобы стор смог обрабатывать thunks.
+import { reducer as formReducer } from 'redux-form'
 
 // type ReducersType = typeof reducers // тип стейта
 export type StateStoreType = ReturnType<typeof reducers> // тип стейта
@@ -16,7 +17,8 @@ let reducers = combineReducers({
     dialogsPage: dialogsReducer,
     sidebar: sidebarReducer,
     usersPage: usersReducer,
-    auth: authReducer
+    auth: authReducer,
+    form: formReducer
 })
 
 export let store = createStore(reducers, applyMiddleware(thunkMiddleware))
