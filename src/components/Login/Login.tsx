@@ -17,7 +17,7 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
                     <Field placeholder={"Login"} name={"login"} component={"input"}/>
                 </div>
                 <div>
-                    <Field placeholder={"Password"} name={"Password"} component={"input"}/>
+                    <Field placeholder={"Password"} name={"password"} component={"input"}/>
                 </div>
                 <div>
                     <Field type={"checkbox"} name={"rememberMe"} component={"input"}/> remember me
@@ -32,7 +32,7 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
 // HOC reduxForm()() вначале настраивает, а потом вызывает hoc
 
 const LoginReduxForm = reduxForm<FormDataType>({
-    // каждая форма должна иметь уникальное симя
+    // каждая форма должна иметь уникальное имя
     form: 'login'
 })(LoginForm)
 

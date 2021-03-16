@@ -30,13 +30,12 @@ export type ProfileType = {
 }
 export type ProfilePageType = {
     posts: Array<PostsType>
-    newPostText: string
+    //newPostText: string
     profile: ProfileType | null
     status: string
 }
 export type ProfileReducerActionType =
     ReturnType<typeof addPostActionCreator> |
-    ReturnType<typeof updateNewPostTextActionCreator> |
     ReturnType<typeof setUsersProfile> |
     ReturnType<typeof setStatus>
 
@@ -47,13 +46,12 @@ let initialState = {
         {id: 3, message: "Yo!", likesCount: 12},
         {id: 4, message: "Dada", likesCount: 12}
     ],
-    newPostText: 'new post...',
+    //newPostText: 'new post...',
     profile: null,
     status: ""
 }
 
 const ADD_POST = "ADD-POST"
-const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
 const SET_USER_PROFILE = "SET-USER-PROFILE"
 const SET_STATUS = "SET-STATUS"
 
@@ -62,19 +60,13 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileRe
         case ADD_POST: {
             let newPost = {
                 id: 5,
-                message: state.newPostText,
+                message: action.newPostText,
                 likesCount: 0
             }
             return {
                 ...state,
                 posts: [...state.posts, newPost],
                 newPostText: ""
-            }
-        }
-        case UPDATE_NEW_POST_TEXT: {
-            return {
-                ...state,
-                newPostText: action.newText
             }
         }
         case SET_STATUS: {
@@ -91,17 +83,13 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileRe
     }
 }
 
-export const addPostActionCreator = () => ({type: ADD_POST}) as const
+export const addPostActionCreator = (newPostText: string) => ({type: ADD_POST, newPostText}) as const
 
 export const setUsersProfile = (profile: ProfileType) =>
     ({type: SET_USER_PROFILE, profile}) as const
 
 export const setStatus = (status: string) =>
     ({type: SET_STATUS, status}) as const
-
-
-export const updateNewPostTextActionCreator = (text: string) =>
-    ({type: UPDATE_NEW_POST_TEXT, newText: text}) as const
 
 // Thunk
 export const getUserProfile = (userId: string) => {

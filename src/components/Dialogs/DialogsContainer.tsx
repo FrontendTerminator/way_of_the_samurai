@@ -1,15 +1,12 @@
 import React from "react";
 import {
-    addMessageActionCreator,
     addMessageInStateActionCreator,
-    DialogsPageType,
     DialogsReducerActionType
 } from "../../redux/Dialogs-reducer"
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {StateStoreType} from "../../redux/redux-store";
 import {compose, Dispatch } from "redux";
-import {Redirect} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 let mapStateToProps = (state: StateStoreType) => {
@@ -19,11 +16,8 @@ let mapStateToProps = (state: StateStoreType) => {
 }
 let mapDispatchToProps = (dispatch: Dispatch<DialogsReducerActionType>) => {
     return {
-        addNewMessage: () => {
-            dispatch(addMessageInStateActionCreator())
-        },
-        onChange: (newText: string) => {
-            dispatch(addMessageActionCreator(newText))
+        addNewMessage: (newMessageBody: string) => {
+            dispatch(addMessageInStateActionCreator(newMessageBody))
         }
     }
 }

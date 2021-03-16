@@ -9,12 +9,11 @@ export type DialogsType = {
 export type DialogsPageType = {
     messages: Array<MessagesType>
     dialogs: Array<DialogsType>
-    newMessage: string
+    //newMessage: string
 }
 
 export type DialogsReducerActionType =
-    ReturnType<typeof addMessageInStateActionCreator> |
-    ReturnType<typeof addMessageActionCreator>
+    ReturnType<typeof addMessageInStateActionCreator>
 
 let initialState = {
     messages: [
@@ -31,45 +30,27 @@ let initialState = {
         {id: 4, name: 'Sasha'},
         {id: 5, name: 'Viktor'},
         {id: 6, name: 'Valera'}
-    ],
-    newMessage: 'new message'
+    ]
 }
 
 const ADD_POST_ACTION_CONTAINER = "ADD-POST-ACTION-CONTAINER"
-const ADD_MESSAGE = "ADD-MESSAGE"
+
 
 const dialogsReducer = (state: DialogsPageType = initialState, action: DialogsReducerActionType) => {
     switch (action.type) {
-        case ADD_MESSAGE:
-            return {
-                ...state,
-                newMessage: action.newText
-            }
-            // let stateCopy = {...state}
-            // stateCopy.newMessage = action.newText;
-            // return stateCopy
         case ADD_POST_ACTION_CONTAINER:
-            let newMessageCopy = state.newMessage
+            let newMessageCopy = action.newMessageBody
             return {
                 ...state,
-                messages: [...state.messages, {id: 7, message: newMessageCopy}],
-                newMessage: ""
+                messages: [...state.messages, {id: 7, message: newMessageCopy}]
             }
-            // let stateCopy = {...state}
-            // let newMessageObj = {id: 7, message: state.newMessage}
-            // stateCopy.messages = [...state.messages]
-            // stateCopy.messages.push(newMessageObj)
-            // stateCopy.newMessage = ''
-            // return stateCopy
         default:
             return state
     }
 }
 
-export const addMessageInStateActionCreator = () => ({type: ADD_POST_ACTION_CONTAINER}) as const
-
-export const addMessageActionCreator = (text: string) =>
-    ({type: ADD_MESSAGE, newText: text}) as const
+export const addMessageInStateActionCreator = (newMessageBody: string) =>
+    ({type: ADD_POST_ACTION_CONTAINER, newMessageBody}) as const
 
 export default dialogsReducer;
 
