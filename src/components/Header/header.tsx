@@ -5,6 +5,7 @@ import s from "./header.module.css";
 type HeaderTypePropsType = {
     login: string | null
     isAuth: boolean
+    logout: () => void
 }
 
 const Header: React.FC<HeaderTypePropsType> = (props) => {
@@ -12,9 +13,11 @@ const Header: React.FC<HeaderTypePropsType> = (props) => {
         {/*<img*/}
         {/*    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-LsQsFeofHHKzAKKv_gJpQrz8NC_O3yQkdQ&usqp=CAU"*/}
         {/*    />*/}
+
+
         <div className={s.loginBlock}>
             {props.isAuth
-                ? props.login
+                ? <div>{props.login} - <button onClick={props.logout}>Log out</button></div>
                 : <NavLink to={'/login'}>Login</NavLink>}
         </div>
     </header>

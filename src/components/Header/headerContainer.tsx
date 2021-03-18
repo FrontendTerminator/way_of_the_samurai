@@ -2,27 +2,19 @@ import React from "react";
 import Header from "./header";
 import {connect} from "react-redux";
 import {StateStoreType} from "../../redux/redux-store";
-import {getAuthUserData, setAuthUserData} from "../../redux/Auth-reducer";
+import {getAuthUserData, logout} from "../../redux/Auth-reducer";
 
 type HeaderContainerType = {
-    authThunk: () => void
+    getAuthUserData: () => void
     isAuth: boolean
     login: string | null
+    logout: () => void
 }
 
 class HeaderContainer extends React.Component<HeaderContainerType, unknown> {
 
     componentDidMount() {
-        this.props.authThunk()
-
-        /*axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
-            withCredentials: true // объект который переадется вторым аргументом в запрос, чтобы отправить фай cookie, true - отправить. Если этого не сделать то не будет отправляться файл куки и не произойдёт автоматической атворизации через сервак
-        }).then(response => {
-            if (response.data.resultCode === 0) {
-                let {id, email, login} = response.data.data
-                this.props.setAuthUserData(id, email, login)
-            }
-        })*/
+        this.props.getAuthUserData()
     }
 
     render() {
@@ -37,4 +29,4 @@ const MapStateToProps = (state: StateStoreType) => ({
     login: state.auth.login
 })
 
-export default connect(MapStateToProps, {authThunk: getAuthUserData})(HeaderContainer)
+export default connect(MapStateToProps, {getAuthUserData, logout})(HeaderContainer)
