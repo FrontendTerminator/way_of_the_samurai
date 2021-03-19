@@ -1,9 +1,9 @@
 import React from "react";
 import style from "./Users.module.css";
-import {toggleIsFollowingProgress, UserType} from "../../redux/Users-reducer";
+import {UserType} from "../../redux/Users-reducer";
 import userPhoto from "../../assets/images/user.jpg";
 import {NavLink} from "react-router-dom";
-import {usersAPI} from "../../api/api";
+
 
 type UsersComponentType = {
     totalUsersCount: number

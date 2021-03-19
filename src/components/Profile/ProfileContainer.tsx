@@ -30,8 +30,11 @@ class ProfileContainer extends React.Component<ProfileContainerType, ProfileType
 // если у нас нет айди, когда мы просто перешли в profile по пути /profile тогда говорим что бы айди по умолчанию было authorisedUserId
         let userId = this.props.match.params.userId
         if (!userId) {
-            //@ts-ignore
             userId = String(this.props.authorisedUserId)
+            if (!userId) {
+                debugger
+                this.props.history.push("/login")
+            }
         }
         this.props.getUserProfile(userId)
         this.props.getStatus(userId)
