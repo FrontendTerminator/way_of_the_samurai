@@ -1,22 +1,22 @@
 import React from "react";
 import Profile from "./Profile";
-import axios from "axios";
 import {connect} from "react-redux";
 import {getStatus, getUserProfile, ProfileType, setUsersProfile, updateStatus} from "../../redux/Profile-reducer";
 import {StateStoreType} from "../../redux/redux-store";
-import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
 type MapStatePropsType = {
     profile: ProfileType | null
     status: string
+    authorisedUserId: number | null
+    isAuth: boolean
 }
 type MapDispatchPropsType = {
     getUserProfile: (userId: string) => void
     getStatus: (userId: string) => void
     updateStatus: (status: string) => void
-
 }
 type PathParamsType = { // типизация параметра для withRouter - RouteComponentProps<PathParamsType>
     userId: string
@@ -27,10 +27,11 @@ type ProfileContainerType = RouteComponentProps<PathParamsType> & MapDispatchPro
 class ProfileContainer extends React.Component<ProfileContainerType, ProfileType> {
 
     componentDidMount() {
-// если у нас нет айди, когда мы просто перешли в profile по пути /profile тогда говорим что бы айди по умолчанию было 2
+// если у нас нет айди, когда мы просто перешли в profile по пути /profile тогда говорим что бы айди по умолчанию было authorisedUserId
         let userId = this.props.match.params.userId
         if (!userId) {
-            userId = "12618"
+            //@ts-ignore
+            userId = String(this.props.authorisedUserId)
         }
         this.props.getUserProfile(userId)
         this.props.getStatus(userId)
@@ -50,7 +51,9 @@ class ProfileContainer extends React.Component<ProfileContainerType, ProfileType
 
 let mapStateToProps = (state: StateStoreType): MapStatePropsType => ({
     profile: state.profilePage.profile,
-    status: state.profilePage.status
+    status: state.profilePage.status,
+    authorisedUserId: state.auth.userId,
+    isAuth: state.auth.isAuth
 })
 
 export default compose<React.ComponentType>(
@@ -58,8 +61,6 @@ export default compose<React.ComponentType>(
     withRouter,
     withAuthRedirect
 )(ProfileContainer)
-
-
 
 // // custom Hoc from folder hoc
 // let AuthRedirectComponent = withAuthRedirect(ProfileContainer)

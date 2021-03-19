@@ -3,6 +3,7 @@ import {Dispatch} from "redux";
 import {FormAction} from "redux-form";
 import {StateStoreType} from "./redux-store";
 import { ThunkAction } from "redux-thunk";
+import {stopSubmit} from "redux-form"
 
 const SET_USER_DATA = 'SET_USER_DATA'
 
@@ -51,11 +52,20 @@ export const getAuthUserData = () => {
 }
 
 export const login = (email: string, password: string, rememberMe: boolean): AuthReducerThunkT => {
+
     return (dispatch) => {
         authAPI.login(email, password, rememberMe)
             .then(response => {
                 if (response.data.resultCode === 0) {
                     dispatch(getAuthUserData())
+                } else {
+                    // action creator из библиотеки redux form для ошибки в введённых данных. Прекращает отправку форм
+                    // первым параметром передаем какую форму мы останавливаем, вторым свойством (email) передаём проблемное поле которое вызвало ошибку
+                    // если я введу неправильный меил то мне подсветит ошибку
+                    // Общая ошибка для всей формы _error. Также есть общая ошибка для не правильно введёных данных, которая задиспачит её в стейт и через пропсы мы потом сможем вывести содержимое это ошибки
+                    let message = response.data.messages.length > 0 ? response.data.messages[0] : 'some error'
+                    let action = stopSubmit("login", {_error: message})
+                    dispatch(action)
                 }
             })
     }
