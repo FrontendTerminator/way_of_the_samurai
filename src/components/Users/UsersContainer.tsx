@@ -1,13 +1,21 @@
 import React from "react";
 import {connect} from "react-redux";
 import {
-    followUser, getUsers, setCurrentPage, unfollowUser,
+    followUser, requestUsers, setCurrentPage, unfollowUser,
     UserType
 } from "../../redux/Users-reducer";
 import {StateStoreType} from "../../redux/redux-store";
 import {Users} from "./users";
 import {Preloader} from "../Common/Preloader/Preloader";
 import {compose} from "redux";
+import {
+    getCurrentPage,
+    getFollowingInProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalUsersCount,
+    getUsers
+} from "../../redux/users-selectors";
 
 
 type UsersPagePropsType = {
@@ -61,18 +69,18 @@ class UsersContainer extends React.Component<UsersPagePropsType, Array<UserType>
 
 let mapStateToProps = (state: StateStoreType) => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state)
     }
 }
 
 export const UsersContainerContext = compose<React.ComponentType>(
     //withAuthRedirect,
-    connect(mapStateToProps, {unfollowUser, followUser, setCurrentPage, getUsers})
+    connect(mapStateToProps, {unfollowUser, followUser, setCurrentPage, getUsers: requestUsers})
 )(UsersContainer)
 
 // // withAuthRedirect - custom Hoc from folder hoc
