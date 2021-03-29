@@ -23,7 +23,6 @@ type PathParamsType = { // типизация параметра для withRout
 }
 type ProfileContainerType = RouteComponentProps<PathParamsType> & MapDispatchPropsType & MapStatePropsType
 
-
 class ProfileContainer extends React.Component<ProfileContainerType, ProfileType> {
 
     componentDidMount() {
@@ -41,6 +40,7 @@ class ProfileContainer extends React.Component<ProfileContainerType, ProfileType
     }
 
     render() {
+        //console.log('ProfileContainer')
         return (
             <Profile
                 {...this.props}

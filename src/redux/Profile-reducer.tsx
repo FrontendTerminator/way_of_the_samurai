@@ -106,6 +106,7 @@ export const getStatus = (userId: string) => {
         profileAPI.getStatus(userId)
             .then(response => {
                 dispatch(setStatus(response.data))
+                //console.log(`thunk api: ${response.data}`)
             })
     }
 }
