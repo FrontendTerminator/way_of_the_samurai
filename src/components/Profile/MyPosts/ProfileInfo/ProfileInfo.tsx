@@ -1,8 +1,8 @@
-import React, {useEffect} from "react";
+import React from "react";
 import s from "./ProfileInfo.module.css"
 import {ProfileType} from "../../../../redux/Profile-reducer";
 import {Preloader} from "../../../Common/Preloader/Preloader";
-import {ProfileStatus} from "./ProfileStatus";
+import {ProfileStatusWithHooks} from "./ProfileStatusWithHooks";
 
 
 type ProfileInfoType = {
@@ -24,7 +24,7 @@ const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
             </div>*/}
             <div className={s.descriptionBlock}>
                 <img src={props.profile.photos.large}/>
-                <ProfileStatus
+                <ProfileStatusWithHooks
                     status={props.status}
                     updateStatus={props.updateStatus}
                 />

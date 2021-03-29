@@ -29,7 +29,6 @@ class App extends React.Component<AppPropsType, unknown> {
             return <Preloader/>
         }
 
-
         return (
             <BrowserRouter>
                 <div className={"app-wrapper"}>
