@@ -8,16 +8,11 @@ type ProfileInfoType = {
 
 export const ProfileStatusWithHooks: React.FC<ProfileInfoType> = (props) => {
 
-    //console.log('render')
-
     const [editMode, setEditMode] = useState<boolean>(false)
     const [status, setStatus] = useState<string>(props.status)
-
-/*  console.log(`props.status + ${props.status}`)
-    console.log(`status + ${status}`)*/
+    debugger
 
     useEffect(() => {
-        //console.log("Effect")
         setStatus(props.status)
     }, [props.status])
 
