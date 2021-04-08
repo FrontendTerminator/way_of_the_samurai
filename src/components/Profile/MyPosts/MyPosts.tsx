@@ -15,7 +15,9 @@ export type MyPostsType = {
     addPost: (newPostText: string) => void
 }
 
-const MyPosts: React.FC<MyPostsType> = (props) => {
+const MyPosts: React.FC<MyPostsType> = React.memo((props) => {
+    console.log('post')
+
     let postsElements =
         props.posts.map((p: PostsArrayType) => <Post message={p.message} likes={p.likesCount}/>)
 
@@ -34,7 +36,7 @@ const MyPosts: React.FC<MyPostsType> = (props) => {
             </div>
         </div>
     )
-}
+})
 
 export default MyPosts;
 

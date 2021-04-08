@@ -10,7 +10,6 @@ export const ProfileStatusWithHooks: React.FC<ProfileInfoType> = (props) => {
 
     const [editMode, setEditMode] = useState<boolean>(false)
     const [status, setStatus] = useState<string>(props.status)
-    debugger
 
     useEffect(() => {
         setStatus(props.status)
