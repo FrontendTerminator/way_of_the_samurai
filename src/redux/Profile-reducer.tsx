@@ -37,7 +37,8 @@ export type ProfilePageType = {
 export type ProfileReducerActionType =
     ReturnType<typeof addPostActionCreator> |
     ReturnType<typeof setUsersProfile> |
-    ReturnType<typeof setStatus>
+    ReturnType<typeof setStatus> |
+    ReturnType<typeof deletePost>
 
 let initialState = {
     posts: [
@@ -54,6 +55,7 @@ let initialState = {
 const ADD_POST = "ADD-POST"
 const SET_USER_PROFILE = "SET-USER-PROFILE"
 const SET_STATUS = "SET-STATUS"
+const DELETE_POST = "DELETE-POST"
 
 const profileReducer = (state: ProfilePageType = initialState, action: ProfileReducerActionType) => {
     switch (action.type) {
@@ -78,6 +80,8 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileRe
         case SET_USER_PROFILE: {
             return {...state, profile: action.profile}
         }
+        case "DELETE-POST":
+            return {...state, posts: state.posts.filter(p => p.id !== action.postId)}
         default:
             return state
     }
@@ -85,11 +89,11 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileRe
 
 export const addPostActionCreator = (newPostText: string) => ({type: ADD_POST, newPostText}) as const
 
-export const setUsersProfile = (profile: ProfileType) =>
-    ({type: SET_USER_PROFILE, profile}) as const
+export const setUsersProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile}) as const
 
-export const setStatus = (status: string) =>
-    ({type: SET_STATUS, status}) as const
+export const setStatus = (status: string) => ({type: SET_STATUS, status}) as const
+
+export const deletePost = (postId: number) => ({type: DELETE_POST, postId}) as const
 
 // Thunk
 export const getUserProfile = (userId: string) => {
