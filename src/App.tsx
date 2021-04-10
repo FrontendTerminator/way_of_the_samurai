@@ -30,7 +30,6 @@ class App extends React.Component<AppPropsType, unknown> {
         }
 
         return (
-            <BrowserRouter>
                 <div className={"app-wrapper"}>
                     <HeaderContainer/>
                     <NavbarContainer/>
@@ -46,8 +45,7 @@ class App extends React.Component<AppPropsType, unknown> {
                                render={() => <Login/>}/>
                     </div>
                 </div>
-            </BrowserRouter>
-        );
+        )
     }
 }
 

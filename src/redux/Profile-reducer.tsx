@@ -97,32 +97,27 @@ export const deletePost = (postId: number) => ({type: DELETE_POST, postId}) as c
 
 // Thunk
 export const getUserProfile = (userId: string) => {
-    return (dispatch: Dispatch<ProfileReducerActionType>) => {
-        usersAPI.getProfile(userId)
-            .then(response => {
-                dispatch(setUsersProfile(response.data))
-            })
+    return async (dispatch: Dispatch<ProfileReducerActionType>) => {
+        const response = await usersAPI.getProfile(userId)
+        dispatch(setUsersProfile(response.data))
+
     }
 }
 
 export const getStatus = (userId: string) => {
-    return (dispatch: Dispatch<ProfileReducerActionType>) => {
-        profileAPI.getStatus(userId)
-            .then(response => {
-                dispatch(setStatus(response.data))
-                //console.log(`thunk api: ${response.data}`)
-            })
+    return async (dispatch: Dispatch<ProfileReducerActionType>) => {
+        const response = await profileAPI.getStatus(userId)
+        dispatch(setStatus(response.data))
+        //console.log(`thunk api: ${response.data}`)
     }
 }
 
 export const updateStatus = (status: string) => {
-    return (dispatch: Dispatch<ProfileReducerActionType>) => {
-        profileAPI.updateStatus(status)
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    dispatch(setStatus(status))
-                }
-            })
+    return async (dispatch: Dispatch<ProfileReducerActionType>) => {
+        const response = await profileAPI.updateStatus(status)
+        if (response.data.resultCode === 0) {
+            dispatch(setStatus(status))
+        }
     }
 }
 
