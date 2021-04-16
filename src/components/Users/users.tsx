@@ -18,7 +18,8 @@ type UsersComponentType = {
 export const Users: React.FC<UsersComponentType> = (props) => {
     return (
         <div>
-            <Paginator totalUsersCount={props.totalUsersCount}
+            <Paginator portionSize={10}
+                       totalItemsCount={props.totalUsersCount}
                        pageSize={props.pageSize}
                        onPageChanged={props.onPageChanged}
                        currentPage={props.currentPage}/>

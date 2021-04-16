@@ -1,4 +1,4 @@
-import {applyMiddleware, combineReducers, createStore } from "redux";
+import {applyMiddleware, combineReducers, compose, createStore} from "redux";
 import profileReducer from "./Profile-reducer";
 import dialogsReducer from "./Dialogs-reducer";
 import sidebarReducer from "./Sidebar-reducer";
@@ -8,7 +8,6 @@ import thunkMiddleware from "redux-thunk"; // yarn add redux-thunk по дефо
 import { reducer as formReducer } from 'redux-form'
 import {appReducer} from "./App-reducer";
 
-// type ReducersType = typeof reducers // тип стейта
 export type StateStoreType = ReturnType<typeof reducers> // тип стейта
 
 export type StoreType = typeof store // типизация всего стора
@@ -23,7 +22,11 @@ let reducers = combineReducers({
     app: appReducer
 })
 
-export let store = createStore(reducers, applyMiddleware(thunkMiddleware))
+// @ts-ignore
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+export const store = createStore(reducers, composeEnhancers(applyMiddleware(thunkMiddleware)));
+
+//export let store = createStore(reducers, applyMiddleware(thunkMiddleware))
 
 // @ts-ignore
 window.store = store
