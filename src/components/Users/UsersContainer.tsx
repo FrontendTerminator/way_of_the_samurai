@@ -78,10 +78,12 @@ let mapStateToProps = (state: StateStoreType) => {
     }
 }
 
-export const UsersContainerContext = compose<React.ComponentType>(
+const UsersContainerContext = compose<React.ComponentType>(
     //withAuthRedirect,
     connect(mapStateToProps, {unfollowUser, followUser, setCurrentPage, getUsers: requestUsers})
 )(UsersContainer)
+
+export default UsersContainerContext
 
 // // withAuthRedirect - custom Hoc from folder hoc
 // export const UsersContainerContext = withAuthRedirect(connect(mapStateToProps,
