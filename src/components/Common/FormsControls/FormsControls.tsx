@@ -8,17 +8,15 @@ export const FormControl: React.FC = ({input, meta, child, ...props}: any) => {
             <div>
                 {props.children}
             </div>
-            { hasError && <span>{meta.error}</span> }
+            {hasError && <span>{meta.error}</span>}
         </div>
     )
 }
-
 
 export const Textarea: React.FC = (props: any) => {
     const {input, meta, child, ...restProps} = props
     return <FormControl {...props}><textarea {...input} {...restProps} ></textarea></FormControl>
 }
-
 
 export const Input: React.FC = (props: any) => {
     const {input, meta, child, ...restProps} = props

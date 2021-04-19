@@ -1,9 +1,10 @@
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent, useState} from "react";
 import s from "./ProfileInfo.module.css"
 import {ProfileType} from "../../../../redux/Profile-reducer";
 import {Preloader} from "../../../Common/Preloader/Preloader";
 import {ProfileStatusWithHooks} from "./ProfileStatusWithHooks";
 import userPhoto from "./../../../../assets/images/user.jpg"
+import {ProfileDataForm} from "./ProfileDataForm";
 
 
 type ProfileInfoType = {
@@ -15,6 +16,8 @@ type ProfileInfoType = {
 }
 
 const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
+
+    const [editMode, setEditMode] = useState(false)
 
     if (!props.profile) {
         return <Preloader/>
@@ -35,12 +38,58 @@ const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
                     status={props.status}
                     updateStatus={props.updateStatus}
                 />
-            </div>
-            <div>
-                Обо мне: {props.profile.aboutMe}
+                {editMode
+                    ? <ProfileDataForm profile={props.profile}/>
+                    : <ProfileData goToEditMode={()=> setEditMode(true)} profile={props.profile} isOwner={props.isOwner}/>
+                }
+
             </div>
         </div>
     )
+}
+
+type ProfileDataPropsType = {
+    profile: ProfileType
+    isOwner: boolean
+    goToEditMode: any // FIX
+}
+export const ProfileData = (props: ProfileDataPropsType) => {
+    return <div>
+        {props.isOwner && <div><button onClick={props.goToEditMode}>edit</button></div>}
+        <div>
+            <b>Full name</b>: {props.profile?.fullName}
+        </div>
+        <div>
+            <b>Looking for a job</b>: {props.profile?.lookingForAJob ? "yes" : "no"}
+        </div>
+        {props.profile?.lookingForAJob &&
+        <div>
+            <b>My professional skills</b>: {props.profile?.lookingForAJobDescription}
+        </div>
+        }
+
+        <div>
+            <b>About me</b>: {props.profile?.aboutMe}
+        </div>
+        <div>
+
+            <b>Contacts</b>: {
+            // @ts-ignore
+            Object.keys(props.profile?.contacts).map(key => {
+                // @ts-ignore
+                return <Contact key={key} contactTitle={key} contactValue={props.profile?.contacts[key]}/>
+            })}
+        </div>
+    </div>
+}
+
+type ContactPropsType = {
+    contactTitle: string
+    contactValue: any
+}
+
+export const Contact = (props: ContactPropsType) => {
+    return <div className={s.contact}><b>{props.contactTitle}</b>: {props.contactValue}</div>
 }
 
 export default ProfileInfo;
