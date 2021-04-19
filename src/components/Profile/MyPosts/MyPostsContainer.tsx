@@ -10,7 +10,6 @@ import {StateStoreType} from "../../../redux/redux-store";
 let mapStateToProps = (state: StateStoreType) => {
     return {
         posts: state.profilePage.posts,
-        //newPostText: state.profilePage.newPostText
     }
 }
 let mapDispatchToProps = (dispatch: Dispatch<ProfileReducerActionType>) => {
