@@ -1,3 +1,7 @@
 .selectedPage {
-    color: red;
+    color: #FF7F66;
+}
+
+.pageNumber {
+    border: 1px black solid;
 }

@@ -53,8 +53,7 @@ let initialState = {
     newPostText: ""
 }
 
-
-const profileReducer = (state: ProfilePageType = initialState, action: ProfileReducerActionType):ProfilePageType  => {
+const profileReducer = (state: ProfilePageType = initialState, action: ProfileReducerActionType): ProfilePageType => {
     switch (action.type) {
         case "ADD-POST": {
             let newPost = {
@@ -96,7 +95,10 @@ export const addPostActionCreator = (newPostText: string) => ({type: "ADD-POST",
 export const setUsersProfile = (profile: ProfileType) => ({type: "SET-USER-PROFILE", profile}) as const
 export const setStatus = (status: string) => ({type: "SET-STATUS", status}) as const
 export const deletePost = (postId: number) => ({type: "DELETE-POST", postId}) as const
-export const savePhotoSuccess = (photos: { small: string, large: string }) => ({type: "SAVE-PHOTO-SUCCESS", photos}) as const
+export const savePhotoSuccess = (photos: { small: string, large: string }) => ({
+    type: "SAVE-PHOTO-SUCCESS",
+    photos
+}) as const
 
 // Thunk
 export const getUserProfile = (userId: string) => {
@@ -114,9 +116,13 @@ export const getStatus = (userId: string) => {
 }
 export const updateStatus = (status: string) => {
     return async (dispatch: Dispatch<ProfileReducerActionType>) => {
-        const response = await profileAPI.updateStatus(status)
-        if (response.data.resultCode === 0) {
-            dispatch(setStatus(status))
+        try {
+            const response = await profileAPI.updateStatus(status)
+            if (response.data.resultCode === 0) {
+                dispatch(setStatus(status))
+            }
+        } catch (error) {
+            alert(error)
         }
     }
 }

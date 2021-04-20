@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
-import {Route} from "react-router-dom";
-//import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
-//import {UsersContainerContext} from "./components/Users/UsersContainer";
+import {Redirect, Route, Switch} from "react-router-dom";
+/* import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import {UsersContainerContext} from "./components/Users/UsersContainer"; */
 import {NavbarContainer} from "./components/Navbar/NavbarContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/headerContainer";
@@ -33,10 +33,13 @@ class App extends React.Component<AppPropsType, unknown> {
         }
 
         return (
-                <div className={"app-wrapper"}>
-                    <HeaderContainer/>
-                    <NavbarContainer/>
-                    <div className={"app-wrapper-content"}>
+            <div className={"app-wrapper"}>
+                <HeaderContainer/>
+                <NavbarContainer/>
+                <div className={"app-wrapper-content"}>
+                    <Switch>
+                        <Route exact path={"/"}
+                               render={() => <Redirect to={"/profile"}/>}/>
                         {/*в пути пишем, чтобы он отображал params (userId), параметр для withRouters, если пути совпадут. Тут мы говорим : по айди и стамив ? - который говорит что id не обязателен*/}
                         <Route path="/Profile/:userId?"
                                render={() => <ProfileContainer/>}/>
@@ -46,8 +49,11 @@ class App extends React.Component<AppPropsType, unknown> {
                                render={WithSuspense(UsersContainerContext)}/>
                         <Route path={"/login"}
                                render={() => <Login/>}/>
-                    </div>
+                        <Route path={"*"}
+                               render={() => <div>404 NOT FOUND</div>}/>
+                    </Switch>
                 </div>
+            </div>
         )
     }
 }
