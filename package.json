@@ -28,7 +28,7 @@
     "typescript": "^4.0.3",
     "web-vitals": "^0.2.4"
   },
-  "homepage": "https://FrontendTerminator.github.io/Portfolio",
+  "homepage": "https://FrontendTerminator.github.io/way_of_the_samurai",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
