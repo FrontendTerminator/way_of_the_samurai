@@ -1,9 +1,10 @@
 import React from "react";
-import s from "./MyPosts.module.css";
+import s from "./MyPosts.module.scss";
 import Post from "./Post/Post";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../../utils/validators/validators";
 import {Textarea} from "../../Common/FormsControls/FormsControls";
+import {Button} from "../../Common/Button/Button";
 
 type PostsArrayType = {
     id: number
@@ -16,7 +17,6 @@ export type MyPostsType = {
 }
 
 const MyPosts: React.FC<MyPostsType> = React.memo((props) => {
-    console.log('post')
 
     let postsElements =
         props.posts.map((p: PostsArrayType) => <Post message={p.message} likes={p.likesCount}/>)
@@ -27,7 +27,6 @@ const MyPosts: React.FC<MyPostsType> = React.memo((props) => {
 
     return (
         <div className={s.postBlock}>
-            <h3>My post</h3>
             <div>
                 <MyPostsFormRedux onSubmit={addPost}/>
             </div>
@@ -56,7 +55,7 @@ const AddNewPostsForm: React.FC<InjectedFormProps<MyPostsFormType>> = (props) =>
                    validate={[required, maxLength10]}
             />
             <div>
-                <button className={s.addPost}>add</button>
+                <Button text={"Add"} />
             </div>
         </form>
     )

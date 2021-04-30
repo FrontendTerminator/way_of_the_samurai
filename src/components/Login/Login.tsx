@@ -6,7 +6,10 @@ import {connect} from "react-redux";
 import {login} from "../../redux/Auth-reducer";
 import {Redirect} from "react-router-dom";
 import {StateStoreType} from "../../redux/redux-store";
-import style from './../Common/FormsControls/FormsControls.module.css'
+import style2 from './../Common/FormsControls/FormsControls.module.css'
+import pic from "../../assets/images/socialNetwork.jpg"
+import style from './Login.module.scss'
+import {Button} from "../Common/Button/Button";
 
 type TypeCaptcha = {
     captchaUrl: string
@@ -21,36 +24,41 @@ type FormDataType = {
 export const LoginForm: React.FC<InjectedFormProps<FormDataType, TypeCaptcha> & TypeCaptcha> = (props) => {
 
     return (
-        /* handleSubmit функция из библиотеки form */
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                {/* Field контейнерная компонента из redux-form */}
-                <Field placeholder={"Email"} name={"email"}
-                       validate={[required]}
-                       component={Input}/>
+        <div className={style.mainDiv}>
+            <div className={style.imageBlock}>
+                <img className={style.image} src={pic}/>
             </div>
-            <div>
-                <Field placeholder={"Password"} name={"password"} type={'password'}
-                       validate={[required]}
-                       component={Input}/>
+            <div className={style.formBlock}>
+                {/*handleSubmit функция из библиотеки form */}
+                <form onSubmit={props.handleSubmit} className={style.form}>
+                    <p style={{marginTop: '-15px'}}>Email: free@samuraijs.com</p>
+                    <p>Password: free</p>
+                    {/* Field контейнерная компонента из redux-form */}
+                    <Field placeholder={"Email"} name={"email"}
+                           validate={[required]}
+                           component={Input}/>
+                    <Field placeholder={"Password"} name={"password"} type={'password'}
+                           validate={[required]}
+                           component={Input}/>
+                    <div className={style.field}><Field type={"checkbox"} name={"rememberMe"} component={Input}/><span
+                        className={style.checkboxText}>remember me</span></div>
+                    {props.captchaUrl && <div><img className={style2.captchaImage} src={props.captchaUrl}/></div>}
+                    {props.captchaUrl && <Field component={"input"}
+                                                placeholder={"anti bot symbols"}
+                                                validate={[required]}
+                                                name={"captcha"}/>}
+                    {props.error && <div className={style2.formSummaryError}>
+                        {props.error}
+                    </div>}
+                    <Button text={"Login"}/>
+                </form>
+                <div>
+                    {/*Тестовая учётная запись для логинизации:
+                    Email: free@samuraijs.com
+                    Password: free*/}
+                </div>
             </div>
-            <div>
-                <Field type={"checkbox"} name={"rememberMe"} component={Input}/> remember me
-            </div>
-
-            { props.captchaUrl  && <div><img className={style.captchaImage} src={props.captchaUrl}/></div> }
-            { props.captchaUrl && <Field component={"input"}
-                                      placeholder={"anti bot symbols"}
-                                      validate={[required]}
-                                      name={"captcha"}/> }
-
-            {props.error && <div className={style.formSummaryError}>
-                {props.error}
-            </div>}
-            <div>
-                <button>Login</button>
-            </div>
-        </form>
+        </div>
     )
 }
 
@@ -77,11 +85,12 @@ const Login: React.FC<LoginPropsType> = (props) => {
         props.login(formData.email, formData.password, formData.rememberMe, formData.captcha)
     }
 
-    if (props.isAuth) {return <Redirect to={'/profile'}/>}
+    if (props.isAuth) {
+        return <Redirect to={'/profile'}/>
+    }
 
     return (
         <div>
-            <h1>Login</h1>
             <LoginReduxForm onSubmit={onSubmit} captchaUrl={validCaptcha}/>
         </div>
     )

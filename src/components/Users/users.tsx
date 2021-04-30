@@ -2,7 +2,7 @@ import React from "react";
 import {UserType} from "../../redux/Users-reducer";
 import {Paginator} from "../Common/Paginator/Paginator";
 import {User} from "./user";
-
+import style from "./Users.module.scss"
 
 type UsersComponentType = {
     totalUsersCount: number
@@ -17,7 +17,7 @@ type UsersComponentType = {
 
 export const Users: React.FC<UsersComponentType> = (props) => {
     return (
-        <div>
+        <div className={style.usersBlock}>
             <Paginator portionSize={10}
                        totalItemsCount={props.totalUsersCount}
                        pageSize={props.pageSize}

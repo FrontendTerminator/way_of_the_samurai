@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 import {Redirect, Route, Switch} from "react-router-dom";
 /* import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {UsersContainerContext} from "./components/Users/UsersContainer"; */
@@ -33,25 +33,35 @@ class App extends React.Component<AppPropsType, unknown> {
         }
 
         return (
-            <div className={"app-wrapper"}>
-                <HeaderContainer/>
-                <NavbarContainer/>
-                <div className={"app-wrapper-content"}>
-                    <Switch>
-                        <Route exact path={"/"}
-                               render={() => <Redirect to={"/profile"}/>}/>
-                        {/*в пути пишем, чтобы он отображал params (userId), параметр для withRouters, если пути совпадут. Тут мы говорим : по айди и стамив ? - который говорит что id не обязателен*/}
-                        <Route path="/Profile/:userId?"
-                               render={() => <ProfileContainer/>}/>
-                        <Route path="/dialogs"
-                               render={WithSuspense(DialogsContainer)}/>
-                        <Route path={"/users"}
-                               render={WithSuspense(UsersContainerContext)}/>
-                        <Route path={"/login"}
-                               render={() => <Login/>}/>
-                        <Route path={"*"}
-                               render={() => <div>404 NOT FOUND</div>}/>
-                    </Switch>
+            <div className={"globalDiv"}>
+                <div className={"app-wrapper"}>
+                    <div className={"header"}>
+                        <HeaderContainer/>
+                    </div>
+                    <div className={"mainBlock"}>
+                        <div className={"navbar"}>
+                            <NavbarContainer/>
+                        </div>
+                        <div className={"appContent"}>
+                            <div className={"app-wrapper-content2"}>
+                                <Switch>
+                                    <Route exact path={"/"}
+                                           render={() => <Redirect to={"/profile"}/>}/>
+                                    {/*в пути пишем, чтобы он отображал params (userId), параметр для withRouters, если пути совпадут. Тут мы говорим : по айди и стамив ? - который говорит что id не обязателен*/}
+                                    <Route path="/Profile/:userId?"
+                                           render={() => <ProfileContainer/>}/>
+                                    <Route path="/dialogs"
+                                           render={WithSuspense(DialogsContainer)}/>
+                                    <Route path={"/users"}
+                                           render={WithSuspense(UsersContainerContext)}/>
+                                    <Route path={"/login"}
+                                           render={() => <Login/>}/>
+                                    <Route path={"*"}
+                                           render={() => <div>404 NOT FOUND</div>}/>
+                                </Switch>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         )

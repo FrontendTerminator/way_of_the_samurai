@@ -1,0 +1,60 @@
+@import "src/sass/variables";
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.globalDiv {
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  min-height: 100vh;
+
+  .app-wrapper {
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+
+    .header {
+      height: 48px;
+      width: 100%;
+      background-color: $purpleColor;
+      margin-bottom: 10px;
+      border-radius: 4px;
+    }
+
+    .mainBlock {
+      display: flex;
+      max-width: 100%;
+      //position: relative;
+
+      .navbar {
+        width: 200px;
+        height: 100%;
+        background-color: $orangeColor;
+        margin-right: 10px;
+        border-radius: 4px;
+      }
+
+      .appContent {
+        //background-color: #ffcd6a;
+        width: 100%;
+        border-radius: 4px;
+      }
+    }
+  }
+}
+
+
+
+
+/*.app-wrapper-content2 {
+    background-color: #ffcd6a;
+    margin: 7px;
+    border-radius: 4px;
+}*/
+
+
+
+

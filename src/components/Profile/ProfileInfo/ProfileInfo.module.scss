@@ -1,0 +1,42 @@
+@import "src/sass/variables";
+
+.descriptionBlock {
+  display: flex;
+  background-color: #ffcd6a;
+  border-radius: 4px;
+
+  .photoBlock {
+    display: flex;
+    flex-direction: column;
+    //background-color: $yellowColor;
+    border-radius: 4px;
+    width: 260px;
+    align-items: center;
+    justify-content: center;
+
+    .mainPhoto {
+      margin: 10px 0;
+      height: 240px;
+      width: 240px;
+      border-radius: 4px;
+    }
+
+    .inputFile {
+      margin-bottom: 10px;
+      margin-left: 12px
+    }
+  }
+
+  .profileData {
+    //background-color: $yellowColor;
+    border-radius: 4px;
+    margin-left: 10px;
+    width: 100%;
+  }
+}
+
+
+.contact {
+  padding-left: 10px;
+}
+

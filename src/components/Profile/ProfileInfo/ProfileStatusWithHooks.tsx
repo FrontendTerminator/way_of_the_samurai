@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useEffect, useState} from "react";
-import s from "./ProfileInfo.module.css"
+import s from "./ProfileInfo.module.scss"
 
 type ProfileInfoType = {
     status: string
@@ -32,7 +32,7 @@ export const ProfileStatusWithHooks: React.FC<ProfileInfoType> = (props) => {
         <div>
             {!editMode &&
             <div>
-               <b>Status: </b> <span onDoubleClick={activateEditMode}>{props.status || '-----'}</span>
+               <span>Status: </span> <span onDoubleClick={activateEditMode}>{props.status || '-----'}</span>
             </div>
             }
             {editMode &&

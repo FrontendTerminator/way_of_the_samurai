@@ -1,0 +1,51 @@
+@import "src/sass/variables";
+
+.mainDiv {
+  display: flex;
+  flex-direction: column;
+  background-color: #E4E9FF;
+  border-radius: 4px;
+
+  .imageBlock {
+    width: 100%;
+    border-radius: 4px;
+
+    .image {
+      width: 100%;
+      border-radius: 4px;
+    }
+  }
+
+  .formBlock {
+    border-radius: 4px;
+    background-color: #E4E9FF;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 5px;
+      margin-bottom: 15px;
+
+      p {
+        font-size: 14px;
+      }
+
+      .field {
+        display: flex;
+        align-items: center;
+
+        .checkboxText {
+          padding-bottom: 2px;
+          padding-left: 4px;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
+
