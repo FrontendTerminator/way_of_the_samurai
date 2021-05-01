@@ -43,7 +43,7 @@ export type ProfileReducerActionType =
 
 let initialState = {
     posts: [
-        {id: 1, message: "Hi, how are you?", likesCount: 11},
+        {id: 1, message: "Yo yo!", likesCount: 11},
         {id: 2, message: "It's my first message", likesCount: 12}
     ],
     profile: null,

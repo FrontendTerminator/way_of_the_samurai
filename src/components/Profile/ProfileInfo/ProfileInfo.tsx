@@ -19,7 +19,7 @@ const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
     const [editMode, setEditMode] = useState(false)
 
     if (!props.profile) {
-        return <Preloader/>
+        return <div>loading</div>
     }
 
     const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
@@ -42,7 +42,6 @@ const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
                              status={props.status}
                              updateStatus={props.updateStatus}
                              isOwner={props.isOwner}/>
-
                 {/*<ProfileStatusWithHooks status={props.status}
                                         updateStatus={props.updateStatus}
                 />*/}
@@ -54,7 +53,6 @@ const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
                                    updateStatus={props.updateStatus}
                                    isOwner={props.isOwner}/>
                 }*/}
-
             </div>
         </div>
     )
@@ -70,7 +68,7 @@ type ProfileDataPropsType = {
 export const ProfileData = (props: ProfileDataPropsType) => {
     return (
         <div className={s.profileData}>
-            <div>
+            <div className={s.name}>
                 {props.profile.fullName}
             </div>
             <ProfileStatusWithHooks status={props.status}

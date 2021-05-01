@@ -1,0 +1,12 @@
+@import "src/sass/variables";
+
+.status {
+  display: flex;
+  flex-wrap: wrap;
+  color: gray;
+
+  &:hover {
+    background-color: #E2DEFF;
+    width: 200px;
+  }
+}

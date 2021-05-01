@@ -16,6 +16,7 @@ import {
     getTotalUsersCount,
     getUsersFromReselectLibrary
 } from "../../redux/users-selectors";
+import style from "./UsersContainer.module.scss"
 
 
 type UsersPagePropsType = {
@@ -50,17 +51,21 @@ class UsersContainer extends React.Component<UsersPagePropsType, Array<UserType>
     render() {
         return (
             <>
-                {this.props.isFetching ? <Preloader/> : null}
-                <Users
-                    totalUsersCount={this.props.totalUsersCount}
-                    pageSize={this.props.pageSize}
-                    currentPage={this.props.currentPage}
-                    users={this.props.users}
-                    onPageChanged={this.onPageChanged}
-                    followUser={this.props.followUser}
-                    unfollowUser={this.props.unfollowUser}
-                    followingInProgress={this.props.followingInProgress}
-                />
+                {this.props.isFetching
+                    ? <div className={style.preloaderBlock}>
+                        <Preloader/>
+                     </div>
+                    : <Users
+                        totalUsersCount={this.props.totalUsersCount}
+                        pageSize={this.props.pageSize}
+                        currentPage={this.props.currentPage}
+                        users={this.props.users}
+                        onPageChanged={this.onPageChanged}
+                        followUser={this.props.followUser}
+                        unfollowUser={this.props.unfollowUser}
+                        followingInProgress={this.props.followingInProgress}
+                    />
+                }
             </>
         )
     }
@@ -69,24 +74,43 @@ class UsersContainer extends React.Component<UsersPagePropsType, Array<UserType>
 
 let mapStateToProps = (state: StateStoreType) => {
     return {
-        users: getUsersFromReselectLibrary(state),
-        pageSize: getPageSize(state),
-        totalUsersCount: getTotalUsersCount(state),
-        currentPage: getCurrentPage(state),
-        isFetching: getIsFetching(state),
-        followingInProgress: getFollowingInProgress(state)
+        users: getUsersFromReselectLibrary
+        (
+            state
+        ),
+        pageSize: getPageSize
+        (
+            state
+        ),
+        totalUsersCount: getTotalUsersCount
+        (
+            state
+        ),
+        currentPage: getCurrentPage
+        (
+            state
+        ),
+        isFetching: getIsFetching
+        (
+            state
+        ),
+        followingInProgress: getFollowingInProgress
+        (
+            state
+        )
     }
 }
 
-const UsersContainerContext = compose<React.ComponentType>(
-    //withAuthRedirect,
-    connect(mapStateToProps, {unfollowUser, followUser, setCurrentPage, getUsers: requestUsers})
-)(UsersContainer)
+const UsersContainerContext = compose
+    < React.ComponentType > (
+        //withAuthRedirect,
+        connect(mapStateToProps, {unfollowUser, followUser, setCurrentPage, getUsers: requestUsers})
+    )(UsersContainer)
 
 export default UsersContainerContext
 
 // // withAuthRedirect - custom Hoc from folder hoc
 // export const UsersContainerContext = withAuthRedirect(connect(mapStateToProps,
-//     {
+// {
 //         unfollowUser, followUser, setCurrentPage, getUsers
 //     })(UsersContainer))

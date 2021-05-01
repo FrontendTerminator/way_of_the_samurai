@@ -1,23 +1,33 @@
 @import "src/sass/variables";
 
 .header {
-    display: flex;
-    flex-direction: row;
-    justify-content: right;
-    align-items: center;
-    background-color: $purpleColor;
-}
+  background-color: $purpleColor;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
 
-.header img {
-    width: 20px;
-}
-
-.loginBlock{
+  .loginBlock {
     float: right;
     color: white;
     margin-right: 7px;
-}
 
-.loginBlock a{
-    color: white;
+    a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .auth {
+      display: flex;
+      align-items: center;
+
+      .btn {
+        background-color: $orangeColor;
+        color: white;
+        border-radius: 4px;
+        padding: 3px;
+        margin-left: 5px;
+      }
+    }
+  }
 }

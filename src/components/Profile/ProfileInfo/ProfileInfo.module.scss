@@ -8,7 +8,6 @@
   .photoBlock {
     display: flex;
     flex-direction: column;
-    //background-color: $yellowColor;
     border-radius: 4px;
     width: 260px;
     align-items: center;
@@ -28,15 +27,13 @@
   }
 
   .profileData {
-    //background-color: $yellowColor;
     border-radius: 4px;
     margin-left: 10px;
     width: 100%;
+    padding: 10px 0;
+
+    .name {
+      font-size: large;
+    }
   }
 }
-
-
-.contact {
-  padding-left: 10px;
-}
-
