@@ -44,9 +44,7 @@ export type ProfileReducerActionType =
 let initialState = {
     posts: [
         {id: 1, message: "Hi, how are you?", likesCount: 11},
-        {id: 2, message: "It's my first message", likesCount: 12},
-        {id: 3, message: "Yo!", likesCount: 12},
-        {id: 4, message: "Dada", likesCount: 12}
+        {id: 2, message: "It's my first message", likesCount: 12}
     ],
     profile: null,
     status: "",
@@ -63,7 +61,7 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileRe
             }
             return {
                 ...state,
-                posts: [...state.posts, newPost],
+                posts: [newPost, ...state.posts],
                 newPostText: ""
             }
         }

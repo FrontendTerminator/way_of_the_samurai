@@ -23,7 +23,7 @@ export const Users: React.FC<UsersComponentType> = (props) => {
                        pageSize={props.pageSize}
                        onPageChanged={props.onPageChanged}
                        currentPage={props.currentPage}/>
-            <div>
+            <div className={style.usersContainer}>
                 {
                     props.users.map((user: UserType) => <User user={user}
                                                               unfollowUser={props.unfollowUser}

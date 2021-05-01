@@ -1,0 +1,29 @@
+@import "src/sass/variables";
+
+.paginatorBlock {
+    display: flex;
+    align-items: center;
+}
+
+.selectedPage {
+    color: $orangeColor;
+}
+
+.btn {
+    background-color: $orangeColor;
+    color: white;
+    border-radius: 4px;
+    padding: 2px;
+    margin: 0 2px;
+}
+
+.pageNumber {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 500;
+    border: 1px black solid;
+    min-width: 20px;
+    height: 20px;
+}

@@ -35,7 +35,7 @@ const Navbar: React.FC<NavbarType> = (props) => {
             <div className={s.item}>
                 <a href="/settings">Settings</a>
             </div>
-            <div className={s.item}>
+            {/*<div className={s.item}>
                 <a href="/friends">Friends</a>
                 <div className={s.friends}>
                     <div className={s.friend}>
@@ -54,7 +54,7 @@ const Navbar: React.FC<NavbarType> = (props) => {
                         {props.sidebar.friends[2].name}
                     </div>
                 </div>
-            </div>
+            </div>*/}
         </nav>
     )
 }

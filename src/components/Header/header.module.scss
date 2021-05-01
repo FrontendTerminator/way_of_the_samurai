@@ -1,0 +1,23 @@
+@import "src/sass/variables";
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
+    background-color: $purpleColor;
+}
+
+.header img {
+    width: 20px;
+}
+
+.loginBlock{
+    float: right;
+    color: white;
+    margin-right: 7px;
+}
+
+.loginBlock a{
+    color: white;
+}

@@ -43,7 +43,7 @@ type MyPostsFormType = {
     newPostText: string
 }
 
-const maxLength10 = maxLengthCreator(10)
+/*const maxLength10 = maxLengthCreator(10)*/
 
 const AddNewPostsForm: React.FC<InjectedFormProps<MyPostsFormType>> = (props) => {
     return (
@@ -52,7 +52,7 @@ const AddNewPostsForm: React.FC<InjectedFormProps<MyPostsFormType>> = (props) =>
                    className={s.textarea}
                    name={"newPostText"}
                    placeholder={"new post"}
-                   validate={[required, maxLength10]}
+                   /*validate={[required, maxLength10]}*/
             />
             <div>
                 <Button text={"Add"} />
