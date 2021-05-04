@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/way_of_the_samurai/static/css/main.830ab6b8.chunk.css",
+    "main.css": "/way_of_the_samurai/static/css/main.6b56bfc4.chunk.css",
     "main.js": "/way_of_the_samurai/static/js/main.480f28d4.chunk.js",
     "main.js.map": "/way_of_the_samurai/static/js/main.480f28d4.chunk.js.map",
     "runtime-main.js": "/way_of_the_samurai/static/js/runtime-main.adc7e323.js",
@@ -14,7 +14,7 @@
     "static/js/4.6d20c7a8.chunk.js.map": "/way_of_the_samurai/static/js/4.6d20c7a8.chunk.js.map",
     "index.html": "/way_of_the_samurai/index.html",
     "static/css/3.59a02fb4.chunk.css.map": "/way_of_the_samurai/static/css/3.59a02fb4.chunk.css.map",
-    "static/css/main.830ab6b8.chunk.css.map": "/way_of_the_samurai/static/css/main.830ab6b8.chunk.css.map",
+    "static/css/main.6b56bfc4.chunk.css.map": "/way_of_the_samurai/static/css/main.6b56bfc4.chunk.css.map",
     "static/js/2.6fc89cf7.chunk.js.LICENSE.txt": "/way_of_the_samurai/static/js/2.6fc89cf7.chunk.js.LICENSE.txt",
     "static/js/3.82cdd903.chunk.js.LICENSE.txt": "/way_of_the_samurai/static/js/3.82cdd903.chunk.js.LICENSE.txt",
     "static/media/socialNetwork.1a44fd3b.jpg": "/way_of_the_samurai/static/media/socialNetwork.1a44fd3b.jpg",
@@ -23,7 +23,7 @@
   "entrypoints": [
     "static/js/runtime-main.adc7e323.js",
     "static/js/2.6fc89cf7.chunk.js",
-    "static/css/main.830ab6b8.chunk.css",
+    "static/css/main.6b56bfc4.chunk.css",
     "static/js/main.480f28d4.chunk.js"
   ]
 }
