@@ -24,6 +24,9 @@ const Navbar: React.FC<NavbarType> = (props) => {
                 <NavLink to="/dialogs" activeClassName={s.activeLink}>Messages</NavLink>
             </div>
             <div className={s.item}>
+                <NavLink to="/chat" activeClassName={s.activeLink}>Chat</NavLink>
+            </div>
+            <div className={s.item}>
                 <NavLink to="/users" activeClassName={s.activeLink}>Users</NavLink>
             </div>
             <div className={s.item}>

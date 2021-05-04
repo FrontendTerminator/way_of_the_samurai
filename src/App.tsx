@@ -12,9 +12,13 @@ import {initializeApp} from "./redux/App-reducer";
 import {StateStoreType} from "./redux/redux-store";
 import {Preloader} from "./components/Common/Preloader/Preloader";
 import {WithSuspense} from "./hoc/withSuspense";
+import {ChatPage} from "./components/Chat/ChatPage";
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
 const UsersContainerContext = React.lazy(() => import("./components/Users/UsersContainer"))
+//const ChatPage = React.lazy(() => import("./components/Chat/ChatPage"))
+
+//const SuspendedChatPage = WithSuspense(<ChatPage/>)
 
 type AppPropsType = {
     initializeApp: () => void
@@ -56,6 +60,8 @@ class App extends React.Component<AppPropsType, unknown> {
                                                render={WithSuspense(UsersContainerContext)}/>
                                         <Route path={"/login"}
                                                render={() => <Login/>}/>
+                                        <Route path={"/chat"}
+                                               render={() => <ChatPage/>}/>
                                         <Route path={"*"}
                                                render={() => <div>404 NOT FOUND</div>}/>
                                     </Switch>
