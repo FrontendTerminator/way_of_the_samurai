@@ -9,10 +9,12 @@ type PostType = {
 const Post: React.FC<PostType> = (props) => {
     return (
         <div className={s.item}>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOfqBBnGW-ntm2BhRJQQJupmw5Gh5drIDnvA&usqp=CAU"/>
-            { props.message }
+            <div className={s.avaAndMessage}>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOfqBBnGW-ntm2BhRJQQJupmw5Gh5drIDnvA&usqp=CAU"/>
+                <div className={s.message}>{props.message}</div>
+            </div>
             <div>
-                <span>like {props.likes}</span>
+                <span style={{fontSize: 'small'}}>like {props.likes}</span>
             </div>
         </div>
     )

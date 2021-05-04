@@ -14,11 +14,11 @@ import {Preloader} from "./components/Common/Preloader/Preloader";
 import {WithSuspense} from "./hoc/withSuspense";
 import {ChatPage} from "./components/Chat/ChatPage";
 
-const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
+/*const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))*/
 const UsersContainerContext = React.lazy(() => import("./components/Users/UsersContainer"))
-//const ChatPage = React.lazy(() => import("./components/Chat/ChatPage"))
+/*const ChatPage = React.lazy(() => import("./components/Chat/ChatPage"))*/
 
-//const SuspendedChatPage = WithSuspense(<ChatPage/>)
+/*const SuspendedChatPage = WithSuspense(<ChatPage/>)*/
 
 type AppPropsType = {
     initializeApp: () => void
@@ -54,8 +54,8 @@ class App extends React.Component<AppPropsType, unknown> {
                                         {/*в пути пишем, чтобы он отображал params (userId), параметр для withRouters, если пути совпадут. Тут мы говорим : по айди и стамив ? - который говорит что id не обязателен*/}
                                         <Route path="/Profile/:userId?"
                                                render={() => <ProfileContainer/>}/>
-                                        <Route path="/dialogs"
-                                               render={WithSuspense(DialogsContainer)}/>
+                                        {/*<Route path="/dialogs"
+                                               render={WithSuspense(DialogsContainer)}/>*/}
                                         <Route path={"/users"}
                                                render={WithSuspense(UsersContainerContext)}/>
                                         <Route path={"/login"}

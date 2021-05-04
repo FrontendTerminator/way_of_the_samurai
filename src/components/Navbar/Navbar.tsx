@@ -20,9 +20,9 @@ const Navbar: React.FC<NavbarType> = (props) => {
             <div className={s.item}>
                 <NavLink to="/profile" activeClassName={s.activeLink}>Profile</NavLink>
             </div>
-            <div className={s.item}>
+            {/*<div className={s.item}>
                 <NavLink to="/dialogs" activeClassName={s.activeLink}>Messages</NavLink>
-            </div>
+            </div>*/}
             <div className={s.item}>
                 <NavLink to="/chat" activeClassName={s.activeLink}>Chat</NavLink>
             </div>
@@ -30,13 +30,13 @@ const Navbar: React.FC<NavbarType> = (props) => {
                 <NavLink to="/users" activeClassName={s.activeLink}>Users</NavLink>
             </div>
             <div className={s.item}>
-                <a href="/news">News</a>
+                <NavLink to="/news" activeClassName={s.activeLink}>News</NavLink>
             </div>
             <div className={s.item}>
-                <a href="/music">Music</a>
+                <NavLink to="/music" activeClassName={s.activeLink}>Music</NavLink>
             </div>
             <div className={s.item}>
-                <a href="/settings">Settings</a>
+                <NavLink to="/settings" activeClassName={s.activeLink}>Settings</NavLink>
             </div>
             {/*<div className={s.item}>
                 <a href="/friends">Friends</a>

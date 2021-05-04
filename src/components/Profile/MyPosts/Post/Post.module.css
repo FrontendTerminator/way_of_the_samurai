@@ -5,8 +5,18 @@
 }
 
 .item {
-    color: black;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 4px;
 }
 
+.avaAndMessage {
+    display: flex;
+    align-items: center;
+}
+
+.message {
+    margin-left: 5px;
+}
 
 

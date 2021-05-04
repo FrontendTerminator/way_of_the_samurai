@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from "react"
+import React, {useEffect, useRef, useState} from "react"
+import s from "./ChatPage.module.scss"
 
 export type ChatMessageType = {
     message: string
@@ -7,10 +8,9 @@ export type ChatMessageType = {
     userName: string
 }
 
-
 export const ChatPage: React.FC = () => {
     return (
-        <div>
+        <div className={s.chatPageBlock}>
             <Chat/>
         </div>
     )
@@ -43,7 +43,7 @@ export const Chat: React.FC = () => {
     }, [])
 
     return (
-        <div>
+        <div className={s.chatBlock}>
             <Messages wsChannel={wsChannel}/>
             <AddMessageForm wsChannel={wsChannel}/>
         </div>
@@ -65,21 +65,28 @@ export const Messages: React.FC<{ wsChannel: WebSocket | null }> = ({wsChannel})
         }
     }, [wsChannel])
 
+    const divRef = useRef<any>(null);
+
+    useEffect(() => {
+        divRef.current.scrollIntoView({behavior: 'smooth'});
+    });
 
     return (
-        <div style={{height: '400px', overflowY: 'auto'}}>
+        <div className={s.messagesBlock} style={{height: '400px', overflowY: 'auto'}}>
             {messages.map((m, index) => <Message key={index} message={m}/>)}
+            <div ref={divRef}/>
         </div>
     )
 }
 
 export const Message: React.FC<{ message: ChatMessageType }> = ({message}) => {
     return (
-        <div>
-            <img style={{height: '30px', width: '30px'}} src={message.photo}/><span>{message.userName}</span>
-            <br/>
-            {message.message}
-            <hr/>
+        <div className={s.messageBlock}>
+            <div className={s.avaAndNameBlock}>
+                <img style={{height: '30px', width: '30px'}} src={message.photo}/>
+                <div className={s.name}>{message.userName}</div>
+            </div>
+            <div className={s.messageText}>{message.message}</div>
         </div>
     )
 }
@@ -109,9 +116,12 @@ export const AddMessageForm: React.FC<{ wsChannel: WebSocket | null }> = ({wsCha
 
 
     return (
-        <div>
-            <textarea onChange={e => setMessage(e.currentTarget.value)}/>
-            <button disabled={wsChannel === null || readyStatus !== 'ready'} onClick={sendMessage}>Send</button>
+        <div className={s.addMessageFormBlock}>
+            <textarea onChange={e => setMessage(e.currentTarget.value)}
+                      placeholder={"your message"}
+                      value={message}/>
+            <button disabled={wsChannel === null || readyStatus !== 'ready'}
+                    onClick={sendMessage}>Send</button>
         </div>
     )
 }
