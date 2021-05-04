@@ -2,8 +2,8 @@
 
 .descriptionBlock {
   display: flex;
-  background-color: $purpleColor2;
-  border-radius: 4px;
+  /*background-color: $purpleColor2;
+  border-radius: 4px;*/
 
   .photoBlock {
     display: flex;
@@ -22,7 +22,14 @@
 
     .inputFile {
       margin-bottom: 10px;
-      margin-left: 12px
+      margin-left: 12px;
+      &::-webkit-file-upload-button {
+        background: $orangeColor;
+        color: white;
+        height: 26px;
+        border-radius: 4px;
+        padding: 3px;
+      }
     }
   }
 
